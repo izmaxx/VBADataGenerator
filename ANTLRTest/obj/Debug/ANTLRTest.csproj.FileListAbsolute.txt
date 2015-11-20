@@ -4,3 +4,9 @@ C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\bin\Debug\ANTLRTest.pdb
 C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\obj\Debug\ANTLRTest.csprojResolveAssemblyReference.cache
 C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\obj\Debug\ANTLRTest.exe
 C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\obj\Debug\ANTLRTest.pdb
+C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\bin\Debug\ANTLRTest.exe.config
+C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\bin\Debug\ANTLRTest.exe
+C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\bin\Debug\ANTLRTest.pdb
+C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\obj\Debug\ANTLRTest.csprojResolveAssemblyReference.cache
+C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\obj\Debug\ANTLRTest.exe
+C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\obj\Debug\ANTLRTest.pdb

@@ -12,6 +12,7 @@ namespace Z3Test
         static void Main(string[] args)
         {
             Z3Solver.Program.CheckLessThan(2,"x");
+            //Testing
         }
     }
 }

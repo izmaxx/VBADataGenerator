@@ -1,0 +1,6 @@
+C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\bin\Debug\ANTLRTest.exe.config
+C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\bin\Debug\ANTLRTest.exe
+C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\bin\Debug\ANTLRTest.pdb
+C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\obj\Debug\ANTLRTest.csprojResolveAssemblyReference.cache
+C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\obj\Debug\ANTLRTest.exe
+C:\Users\Isra\Documents\ExcelVBA\ANTLRTest\obj\Debug\ANTLRTest.pdb

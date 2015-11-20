@@ -1,0 +1,10 @@
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\bin\Debug\Z3Test.exe.config
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\bin\Debug\Z3Test.exe
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\bin\Debug\Z3Test.pdb
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\bin\Debug\Z3Solver.exe
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\bin\Debug\Microsoft.Z3.dll
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\bin\Debug\Z3Solver.pdb
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\bin\Debug\Microsoft.Z3.xml
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\obj\Debug\Z3Test.csprojResolveAssemblyReference.cache
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\obj\Debug\Z3Test.exe
+C:\Users\Isra\Documents\ExcelVBA\Z3Test\obj\Debug\Z3Test.pdb

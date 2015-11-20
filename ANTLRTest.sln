@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANTLRTest", "ANTLRTest\ANTLRTest.csproj", "{96479067-5F8F-4B13-B3F3-562D4E8BA1D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Z3Solver", "Z3Solver\Z3Solver.csproj", "{89277992-1C01-4B1E-88C8-E910FD34EA1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Z3Test", "Z3Test\Z3Test.csproj", "{F3D0D53B-B34C-43F3-A445-9C162938E6BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96479067-5F8F-4B13-B3F3-562D4E8BA1D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96479067-5F8F-4B13-B3F3-562D4E8BA1D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96479067-5F8F-4B13-B3F3-562D4E8BA1D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96479067-5F8F-4B13-B3F3-562D4E8BA1D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89277992-1C01-4B1E-88C8-E910FD34EA1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89277992-1C01-4B1E-88C8-E910FD34EA1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89277992-1C01-4B1E-88C8-E910FD34EA1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89277992-1C01-4B1E-88C8-E910FD34EA1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D0D53B-B34C-43F3-A445-9C162938E6BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D0D53B-B34C-43F3-A445-9C162938E6BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D0D53B-B34C-43F3-A445-9C162938E6BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D0D53B-B34C-43F3-A445-9C162938E6BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

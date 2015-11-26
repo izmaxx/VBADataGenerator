@@ -35,12 +35,13 @@ namespace ANTLRTest
             BinaryExpression b3 = Expression.LessThanOrEqual(p2, c1);
             BinaryExpression final = Expression.And(Expression.Or(b1, b2), b3);
 
-            //var test = b1.Left.GetType();
+
+
             System.Console.WriteLine(final);
 
-            List<Expression> exp = new List<Expression>();
-           // LabeledExprVisitor eval = new LabeledExprVisitor();
-           // eval.Visit(tree);
+            VbaTreeVisitor eval = new VbaTreeVisitor();
+            Expression exp = eval.Visit(tree);
+
 
             //parser.addSubExpr();
 

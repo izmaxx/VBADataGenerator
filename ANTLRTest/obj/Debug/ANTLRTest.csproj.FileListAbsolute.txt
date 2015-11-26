@@ -10,3 +10,5 @@ C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\bin\Debug\ANTLRTest.pdb
 C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\obj\Debug\ANTLRTest.csprojResolveAssemblyReference.cache
 C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\obj\Debug\ANTLRTest.exe
 C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\obj\Debug\ANTLRTest.pdb
+C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\bin\Debug\Microsoft.Z3.dll
+C:\ExcelVBAGit\VBADataGenerator\ANTLRTest\bin\Debug\Microsoft.Z3.xml

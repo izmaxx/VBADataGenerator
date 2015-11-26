@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,12 +12,26 @@ namespace Z3Solver
     {
         static void Main(string[] args)
         {
+
+
             using (Context ctx = new Context())
             {
-                IntExpr x = ctx.MkIntConst("a");
-                IntExpr one = ctx.MkInt(3);
-                BoolExpr test = ctx.MkLt(x, one); // x< 3
-                Model model = Check(ctx, test, Status.SATISFIABLE);
+                // Simplified case: (p1 < 3) or (p2 > 3)
+                ParameterExpression p1 = Expression.Parameter(typeof(int), "p1");
+                ParameterExpression p2 = Expression.Parameter(typeof(int), "p2");
+                ConstantExpression three = Expression.Constant(3);
+                BinaryExpression b1 = Expression.LessThan(p1, three);
+                BinaryExpression b2 = Expression.GreaterThan(p2, three);
+                BinaryExpression final = Expression.Or(b1, b2);
+
+                Z3Solver solver = new Z3Solver();
+                var result = solver.calculateTestData(final);
+
+
+                //IntExpr x = ctx.MkIntConst("a");
+                //IntExpr one = ctx.MkInt(3);
+                //BoolExpr test = ctx.MkLt(x, one); // x< 3
+                //Model model = Check(ctx, test, Status.SATISFIABLE);
             }
         }
 

@@ -233,6 +233,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitStartRule(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStartRule(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -293,6 +298,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModule(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModule(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -487,6 +497,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModuleHeader(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModuleHeader(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -539,6 +554,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModuleConfig(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModuleConfig(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -643,6 +663,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModuleConfigElement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModuleConfigElement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -709,6 +734,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModuleAttributes(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModuleAttributes(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -795,6 +825,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModuleDeclarations(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModuleDeclarations(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -871,6 +906,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOptionExplicitStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOptionExplicitStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class OptionBaseStmtContext : ModuleOptionContext {
 		public ITerminalNode OPTION_BASE() { return GetToken(VBGrammarParser.OPTION_BASE, 0); }
@@ -885,6 +925,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOptionBaseStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOptionBaseStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class OptionPrivateModuleStmtContext : ModuleOptionContext {
 		public ITerminalNode OPTION_PRIVATE_MODULE() { return GetToken(VBGrammarParser.OPTION_PRIVATE_MODULE, 0); }
@@ -896,6 +941,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOptionPrivateModuleStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOptionPrivateModuleStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class OptionCompareStmtContext : ModuleOptionContext {
@@ -912,6 +962,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOptionCompareStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOptionCompareStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1015,6 +1070,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModuleDeclarationsElement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModuleDeclarationsElement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1109,6 +1169,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModuleBody(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModuleBody(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1197,6 +1262,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModuleBodyElement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModuleBodyElement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1278,6 +1348,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitModuleBlock(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModuleBlock(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1329,6 +1404,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitAttributeStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAttributeStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1434,6 +1514,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitBlock(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlock(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1756,6 +1841,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitBlockStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlockStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2206,6 +2296,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitAppactivateStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAppactivateStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -2272,6 +2367,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitBeepStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBeepStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -2313,6 +2413,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitChdirStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitChdirStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2357,6 +2462,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitChdriveStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitChdriveStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2407,6 +2517,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitCloseStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCloseStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2501,6 +2616,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitConstStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2601,6 +2721,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitConstSubStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstSubStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -2683,6 +2808,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitDateStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDateStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -2764,6 +2894,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitDeclareStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeclareStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2894,6 +3029,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitDeftypeStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeftypeStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -2984,6 +3124,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitDeleteSettingStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeleteSettingStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3085,6 +3230,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitDoLoopStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDoLoopStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3264,6 +3414,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitEndStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEndStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -3322,6 +3477,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitEnumerationStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEnumerationStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3414,6 +3574,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitEnumerationStmt_Constant(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEnumerationStmt_Constant(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -3495,6 +3660,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitEraseStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEraseStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -3538,6 +3708,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitErrorStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitErrorStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3591,6 +3766,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitEventStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEventStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3655,6 +3835,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitExitStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExitStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -3710,6 +3895,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitFilecopyStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilecopyStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3795,6 +3985,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitForEachStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitForEachStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3927,6 +4122,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitForNextStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitForNextStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -4088,6 +4288,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitFunctionStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunctionStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -4217,6 +4422,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitGetStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGetStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -4305,6 +4515,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitGoSubStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGoSubStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -4348,6 +4563,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitGoToStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGoToStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -4409,6 +4629,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitBlockIfThenElse(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlockIfThenElse(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class InlineIfThenElseContext : IfThenElseStmtContext {
 		public ITerminalNode IF() { return GetToken(VBGrammarParser.IF, 0); }
@@ -4435,6 +4660,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitInlineIfThenElse(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInlineIfThenElse(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -4542,6 +4772,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitIfBlockStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIfBlockStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -4621,6 +4856,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitIfConditionStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIfConditionStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -4673,6 +4913,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitIfElseIfBlockStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIfElseIfBlockStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -4758,6 +5003,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitIfElseBlockStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIfElseBlockStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -4835,6 +5085,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitImplementsStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImplementsStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -4887,6 +5142,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitInputStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInputStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -4970,6 +5230,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitKillStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitKillStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -5022,6 +5287,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitLetStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLetStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -5106,6 +5376,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitLineInputStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLineInputStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -5169,6 +5444,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitLoadStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLoadStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -5219,6 +5499,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitLockStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLockStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -5308,6 +5593,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitLsetStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLsetStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -5377,6 +5667,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitMacroConstStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMacroConstStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -5456,6 +5751,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitMacroIfThenElseStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMacroIfThenElseStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -5531,6 +5831,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitMacroIfBlockStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMacroIfBlockStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -5631,6 +5936,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitMacroElseIfBlockStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMacroElseIfBlockStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -5722,6 +6032,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitMacroElseBlockStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMacroElseBlockStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -5804,6 +6119,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitMidStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMidStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -5874,6 +6194,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitMkdirStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMkdirStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -5924,6 +6249,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitNameStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNameStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -5978,6 +6308,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOnErrorStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOnErrorStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -6047,6 +6382,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOnGoToStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOnGoToStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -6136,6 +6476,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOnGoSubStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOnGoSubStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -6244,6 +6589,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOpenStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOpenStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -6370,6 +6720,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOutputList(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOutputList(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -6538,6 +6893,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitOutputList_Expression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOutputList_Expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -6639,6 +6999,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitPrintStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPrintStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -6729,6 +7094,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitPropertyGetStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPropertyGetStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -6871,6 +7241,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitPropertySetStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPropertySetStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7003,6 +7378,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitPropertyLetStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPropertyLetStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7126,6 +7506,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitPutStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPutStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7222,6 +7607,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitRaiseEventStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRaiseEventStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7308,6 +7698,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitRandomizeStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRandomizeStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7365,6 +7760,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitRedimStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRedimStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -7463,6 +7863,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitRedimSubStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRedimSubStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7538,6 +7943,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitResetStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitResetStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7580,6 +7990,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitResumeStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitResumeStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -7640,6 +8055,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitReturnStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReturnStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7681,6 +8101,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitRmdirStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRmdirStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -7732,6 +8157,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitRsetStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRsetStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -7802,6 +8232,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSavepictureStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSavepictureStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7870,6 +8305,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSaveSettingStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSaveSettingStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -7976,6 +8416,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSeekStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSeekStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8053,6 +8498,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSelectCaseStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelectCaseStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8142,6 +8592,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitCaseCondValue(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCaseCondValue(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class CaseCondToContext : SC_SelectionContext {
 		public ValueStmtContext[] valueStmt() {
@@ -8164,6 +8619,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitCaseCondTo(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCaseCondTo(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class CaseCondIsContext : SC_SelectionContext {
 		public ITerminalNode IS() { return GetToken(VBGrammarParser.IS, 0); }
@@ -8185,6 +8645,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitCaseCondIs(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCaseCondIs(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8283,6 +8748,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSC_Case(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSC_Case(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8402,6 +8872,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitCaseCondSelection(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCaseCondSelection(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class CaseCondElseContext : SC_CondContext {
 		public ITerminalNode ELSE() { return GetToken(VBGrammarParser.ELSE, 0); }
@@ -8413,6 +8888,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitCaseCondElse(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCaseCondElse(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8509,6 +8989,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSendkeysStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSendkeysStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8585,6 +9070,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSetattrStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSetattrStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8655,6 +9145,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSetStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSetStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8713,6 +9208,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitStopStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStopStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8773,6 +9273,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSubStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8892,6 +9397,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitTimeStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTimeStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8969,6 +9479,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitTypeStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -9064,6 +9579,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitTypeStmt_Element(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeStmt_Element(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -9178,6 +9698,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitTypeOfStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeOfStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -9233,6 +9758,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitUnloadStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnloadStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -9283,6 +9813,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitUnlockStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnlockStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -9380,6 +9915,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsStruct(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsStruct(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsAddContext : ValueStmtContext {
 		public ValueStmtContext[] valueStmt() {
@@ -9401,6 +9941,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsAdd(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsAdd(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsLtContext : ValueStmtContext {
@@ -9424,6 +9969,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsLt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsLt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsAddressOfContext : ValueStmtContext {
 		public ITerminalNode ADDRESSOF() { return GetToken(VBGrammarParser.ADDRESSOF, 0); }
@@ -9440,6 +9990,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsAddressOf(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsAddressOf(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsNewContext : ValueStmtContext {
 		public ITerminalNode NEW() { return GetToken(VBGrammarParser.NEW, 0); }
@@ -9455,6 +10010,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsNew(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsNew(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsMultContext : ValueStmtContext {
@@ -9478,6 +10038,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsMult(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsMult(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsNegationContext : ValueStmtContext {
 		public ITerminalNode MINUS() { return GetToken(VBGrammarParser.MINUS, 0); }
@@ -9493,6 +10058,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsNegation(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsNegation(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsAssignContext : ValueStmtContext {
@@ -9516,6 +10086,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsAssign(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsAssign(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsLikeContext : ValueStmtContext {
 		public ValueStmtContext[] valueStmt() {
@@ -9537,6 +10112,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsLike(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsLike(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsDivContext : ValueStmtContext {
@@ -9560,6 +10140,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsDiv(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsDiv(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsPlusContext : ValueStmtContext {
 		public ITerminalNode PLUS() { return GetToken(VBGrammarParser.PLUS, 0); }
@@ -9576,6 +10161,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsPlus(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsPlus(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsNotContext : ValueStmtContext {
 		public ITerminalNode NOT() { return GetToken(VBGrammarParser.NOT, 0); }
@@ -9591,6 +10181,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsNot(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsNot(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsGeqContext : ValueStmtContext {
@@ -9614,6 +10209,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsGeq(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsGeq(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsTypeOfContext : ValueStmtContext {
 		public TypeOfStmtContext typeOfStmt() {
@@ -9628,6 +10228,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsTypeOf(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsTypeOf(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsICSContext : ValueStmtContext {
 		public ImplicitCallStmt_InStmtContext implicitCallStmt_InStmt() {
@@ -9641,6 +10246,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsICS(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsICS(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsNeqContext : ValueStmtContext {
@@ -9664,6 +10274,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsNeq(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsNeq(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsXorContext : ValueStmtContext {
 		public ValueStmtContext[] valueStmt() {
@@ -9685,6 +10300,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsXor(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsXor(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsAndContext : ValueStmtContext {
@@ -9708,6 +10328,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsAnd(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsAnd(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsLeqContext : ValueStmtContext {
 		public ValueStmtContext[] valueStmt() {
@@ -9729,6 +10354,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsLeq(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsLeq(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsPowContext : ValueStmtContext {
@@ -9752,6 +10382,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsPow(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsPow(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsIsContext : ValueStmtContext {
 		public ValueStmtContext[] valueStmt() {
@@ -9773,6 +10408,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsIs(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsIs(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsModContext : ValueStmtContext {
@@ -9796,6 +10436,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsMod(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsMod(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsAmpContext : ValueStmtContext {
 		public ValueStmtContext[] valueStmt() {
@@ -9817,6 +10462,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsAmp(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsAmp(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsOrContext : ValueStmtContext {
@@ -9840,6 +10490,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsOr(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsOr(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsMinusContext : ValueStmtContext {
 		public ValueStmtContext[] valueStmt() {
@@ -9862,6 +10517,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsMinus(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsMinus(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsLiteralContext : ValueStmtContext {
 		public LiteralContext literal() {
@@ -9875,6 +10535,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsLiteral(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsLiteral(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsEqvContext : ValueStmtContext {
@@ -9898,6 +10563,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsEqv(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsEqv(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsImpContext : ValueStmtContext {
 		public ValueStmtContext[] valueStmt() {
@@ -9919,6 +10589,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsImp(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsImp(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class VsGtContext : ValueStmtContext {
@@ -9942,6 +10617,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsGt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsGt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsEqContext : ValueStmtContext {
 		public ValueStmtContext[] valueStmt() {
@@ -9964,6 +10644,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsEq(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsEq(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VsMidContext : ValueStmtContext {
 		public MidStmtContext midStmt() {
@@ -9977,6 +10662,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVsMid(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVsMid(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -10666,6 +11356,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVariableStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariableStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -10745,6 +11440,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVariableListStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariableListStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -10834,6 +11534,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVariableSubStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariableSubStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -10955,6 +11660,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitWhileWendStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWhileWendStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -11037,6 +11747,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitWidthStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWidthStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -11114,6 +11829,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitWithStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWithStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -11217,6 +11937,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitWriteStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWriteStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -11288,6 +12013,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitFileNumber(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFileNumber(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -11351,6 +12081,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitExplicitCallStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExplicitCallStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -11427,6 +12162,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitECS_ProcedureCall(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitECS_ProcedureCall(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -11567,6 +12307,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitECS_MemberProcedureCall(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitECS_MemberProcedureCall(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -11690,6 +12435,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitImplicitCallStmt_InBlock(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImplicitCallStmt_InBlock(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -11770,6 +12520,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitICS_B_MemberProcedureCall(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitICS_B_MemberProcedureCall(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -11893,6 +12648,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitICS_B_ProcedureCall(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitICS_B_ProcedureCall(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -11977,6 +12737,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitImplicitCallStmt_InStmt(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImplicitCallStmt_InStmt(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -12064,6 +12829,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitICS_S_VariableOrProcedureCall(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitICS_S_VariableOrProcedureCall(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -12177,6 +12947,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitICS_S_ProcedureOrArrayCall(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitICS_S_ProcedureOrArrayCall(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -12337,6 +13112,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitICS_S_MembersCall(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitICS_S_MembersCall(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -12446,6 +13226,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitICS_S_MemberCall(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitICS_S_MemberCall(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -12507,6 +13292,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitICS_S_DictionaryCall(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitICS_S_DictionaryCall(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -12553,6 +13343,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitArgsCall(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgsCall(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -12692,6 +13487,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitArgCall(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgCall(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -12752,6 +13552,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitDictionaryCallStmt(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDictionaryCallStmt(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -12809,6 +13614,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitArgList(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgList(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -12924,6 +13734,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitArg(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArg(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -13055,6 +13870,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitArgDefaultValue(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgDefaultValue(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -13123,6 +13943,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSubscripts(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubscripts(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -13206,6 +14031,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitSubscript(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubscript(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -13265,6 +14095,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitAmbiguousIdentifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAmbiguousIdentifier(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -13816,6 +14651,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitAsTypeClause(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAsTypeClause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -13883,6 +14723,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitBaseType(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBaseType(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -13937,6 +14782,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitCertainIdentifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCertainIdentifier(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -14484,6 +15334,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitComparisonOperator(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComparisonOperator(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -14534,6 +15389,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitComplexType(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComplexType(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -14602,6 +15462,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitFieldLength(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFieldLength(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -14820,6 +15685,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitLetterrange(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLetterrange(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -14886,6 +15756,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitLineLabel(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLineLabel(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -14932,6 +15807,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitLiteral(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLiteral(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -14989,6 +15869,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitType(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -15065,6 +15950,11 @@ public partial class VBGrammarParser : Parser {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitTypeHint(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeHint(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -15113,6 +16003,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitVisibility(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVisibility(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -15302,6 +16197,11 @@ public partial class VBGrammarParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IVBGrammarListener typedListener = listener as IVBGrammarListener;
 			if (typedListener != null) typedListener.ExitAmbiguousKeyword(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IVBGrammarVisitor<TResult> typedVisitor = visitor as IVBGrammarVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAmbiguousKeyword(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 

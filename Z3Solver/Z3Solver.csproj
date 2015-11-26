@@ -49,9 +49,17 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Z3ExprVisitor.cs" />
+    <Compile Include="Z3Solver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ANTLRTest\ANTLRTest.csproj">
+      <Project>{96479067-5f8f-4b13-b3f3-562d4e8ba1d8}</Project>
+      <Name>ANTLRTest</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

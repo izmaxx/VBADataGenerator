@@ -24,7 +24,13 @@ namespace ANTLRTest
                         // When you get the results back, put them into a Z3 "or" expression
                         ctx.MkOr(binExpr[0], binExpr[1]);
                         // TODO return the Z3 expression to be solved
-                        return null; 
+                        return null;
+                    case ExpressionType.LessThan:
+                        VisitBinary((BinaryExpression)exp);
+                        return null;
+                    case ExpressionType.Parameter:
+                        // parameter found
+                        return null;
                 }
             }
   
@@ -35,11 +41,26 @@ namespace ANTLRTest
         {
             // Use recursion to generate Z3 constraints for each operand of the binary expression
             // left side -> create a Z3 expression representing the left side
+            Expression left = Visit(b.Left);
+            
             // right side -> creat a Z3 expression representing the right side
+            Expression right = Visit(b.Right);
+
             // Put those into a Z3 format
+            ExpressionType op = b.NodeType;
+
+            using (Context ctx = new Context())
+            {
+                if (op == ExpressionType.LessThan)
+                {
+                    // ctx.MkLt(left, right);
+                }
+                
+            }
+
             Console.WriteLine(b.ToString());
             
-
+            // TODO - return a Z3 expression
             return null;
         }
 

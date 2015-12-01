@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ANTLRTest
 {
-    interface ISolver
+    public interface ISolver
     {
         /// <summary>
         /// Takes in a path constraint (one or more conditions) and returns inputs that will satisfy the path constraint.

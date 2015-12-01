@@ -4,10 +4,24 @@
         <name>Microsoft.Z3</name>
     </assembly>
     <members>
-        <member name="T:Microsoft.Z3.ApplyResult">
+        <member name="T:Microsoft.Z3.AlgebraicNum">
             <summary>
-            ApplyResult objects represent the result of an application of a 
-            tactic to a goal. It contains the subgoals that were produced.
+            Algebraic numbers
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.ArithExpr">
+            <summary>
+            Arithmetic expressions (int/real)
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Expr">
+            <summary>
+            Expressions are terms.     
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.AST">
+            <summary>
+            The abstract syntax tree (AST) class. 
             </summary>
         </member>
         <member name="T:Microsoft.Z3.Z3Object">
@@ -21,31 +35,9 @@
             Finalizer.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.ApplyResult.ConvertModel(System.UInt32,Microsoft.Z3.Model)">
+        <member name="M:Microsoft.Z3.Z3Object.Dispose">
             <summary>
-            Convert a model for the subgoal <paramref name="i"/> into a model for the original 
-            goal <c>g</c>, that the ApplyResult was obtained from. 
-            </summary>
-            <returns>A model for <c>g</c></returns>
-        </member>
-        <member name="M:Microsoft.Z3.ApplyResult.ToString">
-            <summary>
-            A string representation of the ApplyResult.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ApplyResult.NumSubgoals">
-            <summary>
-            The number of Subgoals.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ApplyResult.Subgoals">
-            <summary>
-            Retrieves the subgoals from the ApplyResult.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.AST">
-            <summary>
-            The abstract syntax tree (AST) class. 
+            Disposes of the underlying native Z3 object.
             </summary>
         </member>
         <member name="M:Microsoft.Z3.AST.op_Equality(Microsoft.Z3.AST,Microsoft.Z3.AST)">
@@ -116,6 +108,11 @@
             Indicates whether the AST is an Expr
             </summary>
         </member>
+        <member name="P:Microsoft.Z3.AST.IsApp">
+            <summary>
+            Indicates whether the AST is an application
+            </summary>
+        </member>
         <member name="P:Microsoft.Z3.AST.IsVar">
             <summary>
             Indicates whether the AST is a BoundVariable
@@ -134,175 +131,6 @@
         <member name="P:Microsoft.Z3.AST.IsFuncDecl">
             <summary>
             Indicates whether the AST is a FunctionDeclaration
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.ASTMap">
-            <summary>
-            Map from AST to AST
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.ASTMap.Contains(Microsoft.Z3.AST)">
-            <summary>
-            Checks whether the map contains the key <paramref name="k"/>.
-            </summary>
-            <param name="k">An AST</param>
-            <returns>True if <paramref name="k"/> is a key in the map, false otherwise.</returns>
-        </member>
-        <member name="M:Microsoft.Z3.ASTMap.Find(Microsoft.Z3.AST)">
-            <summary>
-            Finds the value associated with the key <paramref name="k"/>.
-            </summary>
-            <remarks>
-            This function signs an error when <paramref name="k"/> is not a key in the map.
-            </remarks>
-            <param name="k">An AST</param>    
-        </member>
-        <member name="M:Microsoft.Z3.ASTMap.Insert(Microsoft.Z3.AST,Microsoft.Z3.AST)">
-            <summary>
-            Stores or replaces a new key/value pair in the map.
-            </summary>
-            <param name="k">The key AST</param>
-            <param name="v">The value AST</param>
-        </member>
-        <member name="M:Microsoft.Z3.ASTMap.Erase(Microsoft.Z3.AST)">
-            <summary>
-            Erases the key <paramref name="k"/> from the map.
-            </summary>
-            <param name="k">An AST</param>
-        </member>
-        <member name="M:Microsoft.Z3.ASTMap.Reset">
-            <summary>
-            Removes all keys from the map.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.ASTMap.ToString">
-            <summary>
-            Retrieves a string representation of the map. 
-            </summary>    
-        </member>
-        <member name="P:Microsoft.Z3.ASTMap.Size">
-            <summary>
-            The size of the map
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ASTMap.Keys">
-            <summary>
-            The keys stored in the map.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.ASTVector">
-            <summary>
-            Vectors of ASTs.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.ASTVector.Resize(System.UInt32)">
-            <summary>
-            Resize the vector to <paramref name="newSize"/>.
-            </summary>
-            <param name="newSize">The new size of the vector.</param>
-        </member>
-        <member name="M:Microsoft.Z3.ASTVector.Push(Microsoft.Z3.AST)">
-            <summary>
-            Add the AST <paramref name="a"/> to the back of the vector. The size
-            is increased by 1.
-            </summary>
-            <param name="a">An AST</param>
-        </member>
-        <member name="M:Microsoft.Z3.ASTVector.Translate(Microsoft.Z3.Context)">
-            <summary>
-            Translates all ASTs in the vector to <paramref name="ctx"/>.
-            </summary>
-            <param name="ctx">A context</param>
-            <returns>A new ASTVector</returns>
-        </member>
-        <member name="M:Microsoft.Z3.ASTVector.ToString">
-            <summary>
-            Retrieves a string representation of the vector. 
-            </summary>    
-        </member>
-        <member name="P:Microsoft.Z3.ASTVector.Size">
-            <summary>
-            The size of the vector
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ASTVector.Item(System.UInt32)">
-            <summary>
-            Retrieves the i-th object in the vector.
-            </summary>
-            <remarks>May throw an IndexOutOfBoundsException when <paramref name="i"/> is out of range.</remarks>
-            <param name="i">Index</param>
-            <returns>An AST</returns>
-        </member>
-        <member name="T:Microsoft.Z3.Constructor">
-            <summary>
-            Constructors are used for datatype sorts.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Constructor.Finalize">
-            <summary>
-            Destructor.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Constructor.NumFields">
-            <summary>
-            The number of fields of the constructor.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Constructor.ConstructorDecl">
-            <summary>
-            The function declaration of the constructor.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Constructor.TesterDecl">
-            <summary>
-            The function declaration of the tester.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Constructor.AccessorDecls">
-            <summary>
-            The function declarations of the accessors
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.ConstructorList">
-            <summary>
-            Lists of constructors
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.ConstructorList.Finalize">
-            <summary>
-            Destructor.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3_lbool">
-            <summary>Z3_lbool</summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3_symbol_kind">
-            <summary>Z3_symbol_kind</summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3_parameter_kind">
-            <summary>Z3_parameter_kind</summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3_sort_kind">
-            <summary>Z3_sort_kind</summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3_ast_kind">
-            <summary>Z3_ast_kind</summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3_decl_kind">
-            <summary>Z3_decl_kind</summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3_ast_print_mode">
-            <summary>Z3_ast_print_mode</summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3_error_code">
-            <summary>Z3_error_code</summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3_goal_prec">
-            <summary>Z3_goal_prec</summary>
-        </member>
-        <member name="T:Microsoft.Z3.Expr">
-            <summary>
-            Expressions are terms.     
             </summary>
         </member>
         <member name="M:Microsoft.Z3.Expr.Simplify(Microsoft.Z3.Params)">
@@ -355,10 +183,14 @@
             </summary>    
         </member>
         <member name="M:Microsoft.Z3.Expr.#ctor(Microsoft.Z3.Context)">
-            <summary> Constructor for Expr </summary>
+            <summary> 
+            Constructor for Expr 
+            </summary>
         </member>
         <member name="M:Microsoft.Z3.Expr.#ctor(Microsoft.Z3.Context,System.IntPtr)">
-            <summary> Constructor for Expr </summary>
+            <summary> 
+            Constructor for Expr 
+            </summary>
         </member>
         <member name="P:Microsoft.Z3.Expr.FuncDecl">
             <summary>
@@ -476,6 +308,12 @@
             <summary>
             Indicates whether the term is an implication
             </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Expr.IsInterpolant">
+            <summary>
+            Indicates whether the term is marked for interpolation.
+            </summary>
+            <remarks></remarks>
         </member>
         <member name="P:Microsoft.Z3.Expr.IsInt">
             <summary>
@@ -1563,40 +1401,246 @@
             index.
             </remarks>
         </member>
-        <member name="T:Microsoft.Z3.BoolExpr">
-            <summary>
-            Boolean expressions
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.BoolExpr.#ctor(Microsoft.Z3.Context)">
-            <summary> Constructor for BoolExpr </summary>
-        </member>
-        <member name="M:Microsoft.Z3.BoolExpr.#ctor(Microsoft.Z3.Context,System.IntPtr)">
-            <summary> Constructor for BoolExpr </summary>
-        </member>
-        <member name="T:Microsoft.Z3.ArithExpr">
-            <summary>
-            Arithmetic expressions (int/real)
-            </summary>
-        </member>
         <member name="M:Microsoft.Z3.ArithExpr.#ctor(Microsoft.Z3.Context)">
             <summary> Constructor for ArithExpr </summary>
         </member>
-        <member name="T:Microsoft.Z3.IntExpr">
+        <member name="M:Microsoft.Z3.AlgebraicNum.ToUpper(System.UInt32)">
             <summary>
-            Int expressions
+            Return a upper bound for a given real algebraic number. 
+            The interval isolating the number is smaller than 1/10^<paramref name="precision"/>.    
+            <seealso cref="P:Microsoft.Z3.Expr.IsAlgebraicNumber"/>   
+            </summary>
+            <param name="precision">the precision of the result</param>
+            <returns>A numeral Expr of sort Real</returns>
+        </member>
+        <member name="M:Microsoft.Z3.AlgebraicNum.ToLower(System.UInt32)">
+            <summary>
+            Return a lower bound for the given real algebraic number. 
+            The interval isolating the number is smaller than 1/10^<paramref name="precision"/>.    
+            <seealso cref="P:Microsoft.Z3.Expr.IsAlgebraicNumber"/>
+            </summary>
+            <param name="precision"></param>
+            <returns>A numeral Expr of sort Real</returns>
+        </member>
+        <member name="M:Microsoft.Z3.AlgebraicNum.ToDecimal(System.UInt32)">
+            <summary>
+            Returns a string representation in decimal notation.
+            </summary>
+            <remarks>The result has at most <paramref name="precision"/> decimal places.</remarks>    
+        </member>
+        <member name="T:Microsoft.Z3.ApplyResult">
+            <summary>
+            ApplyResult objects represent the result of an application of a 
+            tactic to a goal. It contains the subgoals that were produced.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.IntExpr.#ctor(Microsoft.Z3.Context)">
-            <summary> Constructor for IntExpr </summary>
-        </member>
-        <member name="T:Microsoft.Z3.RealExpr">
+        <member name="M:Microsoft.Z3.ApplyResult.ConvertModel(System.UInt32,Microsoft.Z3.Model)">
             <summary>
-            Real expressions
+            Convert a model for the subgoal <paramref name="i"/> into a model for the original 
+            goal <c>g</c>, that the ApplyResult was obtained from. 
+            </summary>
+            <returns>A model for <c>g</c></returns>
+        </member>
+        <member name="M:Microsoft.Z3.ApplyResult.ToString">
+            <summary>
+            A string representation of the ApplyResult.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.RealExpr.#ctor(Microsoft.Z3.Context)">
-            <summary> Constructor for RealExpr </summary>
+        <member name="P:Microsoft.Z3.ApplyResult.NumSubgoals">
+            <summary>
+            The number of Subgoals.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ApplyResult.Subgoals">
+            <summary>
+            Retrieves the subgoals from the ApplyResult.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.ArithSort">
+            <summary>
+            An arithmetic sort, i.e., Int or Real.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Sort">
+            <summary>
+            The Sort class implements type information for ASTs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Sort.op_Equality(Microsoft.Z3.Sort,Microsoft.Z3.Sort)">
+            <summary>
+            Comparison operator.
+            </summary>
+            <param name="a">A Sort</param>
+            <param name="b">A Sort</param>
+            <returns>True if <paramref name="a"/> and <paramref name="b"/> are from the same context 
+            and represent the same sort; false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Z3.Sort.op_Inequality(Microsoft.Z3.Sort,Microsoft.Z3.Sort)">
+            <summary>
+            Comparison operator.
+            </summary>
+            <param name="a">A Sort</param>
+            <param name="b">A Sort</param>
+            <returns>True if <paramref name="a"/> and <paramref name="b"/> are not from the same context 
+            or represent different sorts; false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Z3.Sort.Equals(System.Object)">
+            <summary>
+            Equality operator for objects of type Sort.
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Z3.Sort.GetHashCode">
+            <summary>
+            Hash code generation for Sorts
+            </summary>
+            <returns>A hash code</returns>
+        </member>
+        <member name="M:Microsoft.Z3.Sort.ToString">
+            <summary>
+            A string representation of the sort.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Sort.#ctor(Microsoft.Z3.Context)">
+            <summary>
+            Sort constructor
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Sort.Id">
+            <summary>
+            Returns a unique identifier for the sort.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Sort.SortKind">
+            <summary>
+            The kind of the sort.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Sort.Name">
+            <summary>
+            The name of the sort
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.ArrayExpr">
+            <summary>
+            Array expressions
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.ArrayExpr.#ctor(Microsoft.Z3.Context)">
+            <summary> Constructor for ArrayExpr </summary>
+        </member>
+        <member name="T:Microsoft.Z3.ArraySort">
+            <summary>
+            Array sorts.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ArraySort.Domain">
+            <summary>
+            The domain of the array sort.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ArraySort.Range">
+            <summary>
+            The range of the array sort.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.ASTMap">
+            <summary>
+            Map from AST to AST
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.ASTMap.Contains(Microsoft.Z3.AST)">
+            <summary>
+            Checks whether the map contains the key <paramref name="k"/>.
+            </summary>
+            <param name="k">An AST</param>
+            <returns>True if <paramref name="k"/> is a key in the map, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Z3.ASTMap.Find(Microsoft.Z3.AST)">
+            <summary>
+            Finds the value associated with the key <paramref name="k"/>.
+            </summary>
+            <remarks>
+            This function signs an error when <paramref name="k"/> is not a key in the map.
+            </remarks>
+            <param name="k">An AST</param>    
+        </member>
+        <member name="M:Microsoft.Z3.ASTMap.Insert(Microsoft.Z3.AST,Microsoft.Z3.AST)">
+            <summary>
+            Stores or replaces a new key/value pair in the map.
+            </summary>
+            <param name="k">The key AST</param>
+            <param name="v">The value AST</param>
+        </member>
+        <member name="M:Microsoft.Z3.ASTMap.Erase(Microsoft.Z3.AST)">
+            <summary>
+            Erases the key <paramref name="k"/> from the map.
+            </summary>
+            <param name="k">An AST</param>
+        </member>
+        <member name="M:Microsoft.Z3.ASTMap.Reset">
+            <summary>
+            Removes all keys from the map.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.ASTMap.ToString">
+            <summary>
+            Retrieves a string representation of the map. 
+            </summary>    
+        </member>
+        <member name="P:Microsoft.Z3.ASTMap.Size">
+            <summary>
+            The size of the map
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ASTMap.Keys">
+            <summary>
+            The keys stored in the map.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.ASTVector">
+            <summary>
+            Vectors of ASTs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.ASTVector.Resize(System.UInt32)">
+            <summary>
+            Resize the vector to <paramref name="newSize"/>.
+            </summary>
+            <param name="newSize">The new size of the vector.</param>
+        </member>
+        <member name="M:Microsoft.Z3.ASTVector.Push(Microsoft.Z3.AST)">
+            <summary>
+            Add the AST <paramref name="a"/> to the back of the vector. The size
+            is increased by 1.
+            </summary>
+            <param name="a">An AST</param>
+        </member>
+        <member name="M:Microsoft.Z3.ASTVector.Translate(Microsoft.Z3.Context)">
+            <summary>
+            Translates all ASTs in the vector to <paramref name="ctx"/>.
+            </summary>
+            <param name="ctx">A context</param>
+            <returns>A new ASTVector</returns>
+        </member>
+        <member name="M:Microsoft.Z3.ASTVector.ToString">
+            <summary>
+            Retrieves a string representation of the vector. 
+            </summary>    
+        </member>
+        <member name="P:Microsoft.Z3.ASTVector.Size">
+            <summary>
+            The size of the vector
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ASTVector.Item(System.UInt32)">
+            <summary>
+            Retrieves the i-th object in the vector.
+            </summary>
+            <remarks>May throw an IndexOutOfBoundsException when <paramref name="i"/> is out of range.</remarks>
+            <param name="i">Index</param>
+            <returns>An AST</returns>
         </member>
         <member name="T:Microsoft.Z3.BitVecExpr">
             <summary>
@@ -1609,575 +1653,6 @@
         <member name="P:Microsoft.Z3.BitVecExpr.SortSize">
             <summary>
             The size of the sort of a bit-vector term.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.ArrayExpr">
-            <summary>
-            Array expressions
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.ArrayExpr.#ctor(Microsoft.Z3.Context)">
-            <summary> Constructor for ArrayExpr </summary>
-        </member>
-        <member name="T:Microsoft.Z3.DatatypeExpr">
-            <summary>
-            Datatype expressions
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.DatatypeExpr.#ctor(Microsoft.Z3.Context)">
-            <summary> Constructor for DatatypeExpr </summary>
-        </member>
-        <member name="T:Microsoft.Z3.Fixedpoint">
-            <summary>
-            Object for managing fixedpoints
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.Assert(Microsoft.Z3.BoolExpr[])">
-            <summary>
-            Assert a constraint (or multiple) into the fixedpoint solver.
-            </summary>        
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.RegisterRelation(Microsoft.Z3.FuncDecl)">
-            <summary>
-            Register predicate as recursive relation.
-            </summary>       
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.AddRule(Microsoft.Z3.BoolExpr,Microsoft.Z3.Symbol)">
-            <summary>
-            Add rule into the fixedpoint solver.
-            </summary>        
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.AddFact(Microsoft.Z3.FuncDecl,System.UInt32[])">
-            <summary>
-            Add table fact to the fixedpoint solver.
-            </summary>        
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.Query(Microsoft.Z3.BoolExpr)">
-            <summary>
-            Query the fixedpoint solver.
-            A query is a conjunction of constraints. The constraints may include the recursively defined relations.
-            The query is satisfiable if there is an instance of the query variables and a derivation for it.
-            The query is unsatisfiable if there are no derivations satisfying the query variables. 
-            </summary>        
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.Query(Microsoft.Z3.FuncDecl[])">
-            <summary>
-            Query the fixedpoint solver.
-            A query is an array of relations.
-            The query is satisfiable if there is an instance of some relation that is non-empty.
-            The query is unsatisfiable if there are no derivations satisfying any of the relations.
-            </summary>        
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.GetAnswer">
-            <summary>
-            Retrieve satisfying instance or instances of solver, 
-            or definitions for the recursive predicates that show unsatisfiability.
-            </summary>                
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.GetReasonUnknown">
-            <summary>
-            Retrieve explanation why fixedpoint engine returned status Unknown.
-            </summary>                
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.ToString">
-            <summary>
-            Retrieve internal string representation of fixedpoint object.
-            </summary>                
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.SetPredicateRepresentation(Microsoft.Z3.FuncDecl,Microsoft.Z3.Symbol[])">
-            <summary>
-            Instrument the Datalog engine on which table representation to use for recursive predicate.
-            </summary>                
-        </member>
-        <member name="M:Microsoft.Z3.Fixedpoint.ToString(Microsoft.Z3.BoolExpr[])">
-            <summary>
-            Convert benchmark given as set of axioms, rules and queries to a string.
-            </summary>                
-        </member>
-        <member name="T:Microsoft.Z3.FuncDecl">
-            <summary>
-            Function declarations. 
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.FuncDecl.op_Equality(Microsoft.Z3.FuncDecl,Microsoft.Z3.FuncDecl)">
-            <summary>
-            Comparison operator.
-            </summary>
-            <returns>True if <paramref name="a"/> and <paramref name="b"/> share the same context and are equal, false otherwise.</returns>
-        </member>
-        <member name="M:Microsoft.Z3.FuncDecl.op_Inequality(Microsoft.Z3.FuncDecl,Microsoft.Z3.FuncDecl)">
-            <summary>
-            Comparison operator.
-            </summary>
-            <returns>True if <paramref name="a"/> and <paramref name="b"/> do not share the same context or are not equal, false otherwise.</returns>
-        </member>
-        <member name="M:Microsoft.Z3.FuncDecl.Equals(System.Object)">
-            <summary>
-            Object comparison.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.FuncDecl.GetHashCode">
-            <summary>
-            A hash code.
-            </summary>    
-        </member>
-        <member name="M:Microsoft.Z3.FuncDecl.ToString">
-            <summary>
-            A string representations of the function declaration.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.FuncDecl.Apply(Microsoft.Z3.Expr[])">
-            <summary>
-            Create expression that applies function to arguments.
-            </summary>
-            <param name="args"></param>
-            <returns></returns>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Id">
-            <summary>
-            Returns a unique identifier for the function declaration.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Arity">
-            <summary>
-            The arity of the function declaration
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.DomainSize">
-            <summary>
-            The size of the domain of the function declaration
-            <seealso cref="P:Microsoft.Z3.FuncDecl.Arity"/>
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Domain">
-            <summary>
-            The domain of the function declaration
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Range">
-            <summary>
-            The range of the function declaration
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.DeclKind">
-            <summary>
-            The kind of the function declaration.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Name">
-            <summary>
-            The name of the function declaration
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.NumParameters">
-            <summary>
-            The number of parameters of the function declaration
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Parameters">
-            <summary>
-            The parameters of the function declaration
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Item(Microsoft.Z3.Expr[])">
-            <summary>
-            Create expression that applies function to arguments.
-            </summary>
-            <param name="args"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Microsoft.Z3.FuncDecl.Parameter">
-            <summary>
-            Function declarations can have Parameters associated with them. 
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Int">
-            <summary>The int value of the parameter.</summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Double">
-            <summary>The double value of the parameter.</summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Symbol">
-            <summary>The Symbol value of the parameter.</summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Sort">
-            <summary>The Sort value of the parameter.</summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Parameter.AST">
-            <summary>The AST value of the parameter.</summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Parameter.FuncDecl">
-            <summary>The FunctionDeclaration value of the parameter.</summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Rational">
-            <summary>The rational string value of the parameter.</summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncDecl.Parameter.ParameterKind">
-            <summary>
-            The kind of the parameter.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.FuncInterp">
-            <summary>
-             A function interpretation is represented as a finite map and an 'else' value.
-             Each entry in the finite map represents the value of a function given a set of arguments.  
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.FuncInterp.ToString">
-            <summary>
-            A string representation of the function interpretation.
-            </summary>    
-        </member>
-        <member name="P:Microsoft.Z3.FuncInterp.NumEntries">
-            <summary>
-            The number of entries in the function interpretation.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncInterp.Entries">
-            <summary>
-            The entries in the function interpretation
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncInterp.Else">
-            <summary>
-            The (symbolic) `else' value of the function interpretation.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncInterp.Arity">
-            <summary>
-            The arity of the function interpretation
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.FuncInterp.Entry">
-            <summary>
-            An Entry object represents an element in the finite map used to encode
-            a function interpretation.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.FuncInterp.Entry.ToString">
-            <summary>
-            A string representation of the function entry.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncInterp.Entry.Value">
-            <summary>
-            Return the (symbolic) value of this entry.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncInterp.Entry.NumArgs">
-            <summary>
-            The number of arguments of the entry.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FuncInterp.Entry.Args">
-            <summary>
-            The arguments of the function entry.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.Goal">
-            <summary>
-            A goal (aka problem). A goal is essentially a set
-            of formulas, that can be solved and/or transformed using
-            tactics and solvers.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Goal.Assert(Microsoft.Z3.BoolExpr[])">
-            <summary>
-            Adds the <paramref name="constraints"/> to the given goal. 
-            </summary>   
-        </member>
-        <member name="M:Microsoft.Z3.Goal.Reset">
-            <summary>
-            Erases all formulas from the given goal.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Goal.Translate(Microsoft.Z3.Context)">
-            <summary>
-            Translates (copies) the Goal to the target Context <paramref name="ctx"/>.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Goal.Simplify(Microsoft.Z3.Params)">
-            <summary>
-            Simplifies the goal.
-            </summary>
-            <remarks>Essentially invokes the `simplify' tactic on the goal.</remarks>
-        </member>
-        <member name="M:Microsoft.Z3.Goal.ToString">
-            <summary>
-            Goal to string conversion.
-            </summary>
-            <returns>A string representation of the Goal.</returns>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.Precision">
-            <summary>
-            The precision of the goal. 
-            </summary>
-            <remarks>
-            Goals can be transformed using over and under approximations.
-            An under approximation is applied when the objective is to find a model for a given goal.
-            An over approximation is applied when the objective is to find a proof for a given goal.
-            </remarks>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.IsPrecise">
-            <summary>
-            Indicates whether the goal is precise.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.IsUnderApproximation">
-            <summary>
-            Indicates whether the goal is an under-approximation.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.IsOverApproximation">
-            <summary>
-            Indicates whether the goal is an over-approximation.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.IsGarbage">
-            <summary>
-            Indicates whether the goal is garbage (i.e., the product of over- and under-approximations).
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.Inconsistent">
-            <summary>
-            Indicates whether the goal contains `false'.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.Depth">
-            <summary>
-            The depth of the goal.
-            </summary>
-            <remarks>
-            This tracks how many transformations were applied to it.
-            </remarks>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.Size">
-            <summary>
-            The number of formulas in the goal.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.Formulas">
-            <summary>
-            The formulas in the goal.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.NumExprs">
-            <summary>
-            The number of formulas, subformulas and terms in the goal.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.IsDecidedSat">
-            <summary>
-            Indicates whether the goal is empty, and it is precise or the product of an under approximation.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Goal.IsDecidedUnsat">
-            <summary>
-            Indicates whether the goal contains `false', and it is precise or the product of an over approximation.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.Model">
-            <summary>
-            A Model contains interpretations (assignments) of constants and functions. 
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Model.ConstInterp(Microsoft.Z3.Expr)">
-            <summary>
-            Retrieves the interpretation (the assignment) of <paramref name="a"/> in the model. 
-            </summary>
-            <param name="a">A Constant</param>
-            <returns>An expression if the constant has an interpretation in the model, null otherwise.</returns>
-        </member>
-        <member name="M:Microsoft.Z3.Model.ConstInterp(Microsoft.Z3.FuncDecl)">
-            <summary>
-            Retrieves the interpretation (the assignment) of <paramref name="f"/> in the model. 
-            </summary>
-            <param name="f">A function declaration of zero arity</param>
-            <returns>An expression if the function has an interpretation in the model, null otherwise.</returns>    
-        </member>
-        <member name="M:Microsoft.Z3.Model.FuncInterp(Microsoft.Z3.FuncDecl)">
-            <summary>
-            Retrieves the interpretation (the assignment) of a non-constant <paramref name="f"/> in the model. 
-            </summary>
-            <param name="f">A function declaration of non-zero arity</param>
-            <returns>A FunctionInterpretation if the function has an interpretation in the model, null otherwise.</returns> 
-        </member>
-        <member name="M:Microsoft.Z3.Model.Eval(Microsoft.Z3.Expr,System.Boolean)">
-            <summary>
-            Evaluates the expression <paramref name="t"/> in the current model.
-            </summary>
-            <remarks>
-            This function may fail if <paramref name="t"/> contains quantifiers, 
-            is partial (MODEL_PARTIAL enabled), or if <paramref name="t"/> is not well-sorted.
-            In this case a <c>ModelEvaluationFailedException</c> is thrown.
-            </remarks>
-            <param name="t">An expression</param>
-            <param name="completion">
-            When this flag is enabled, a model value will be assigned to any constant 
-            or function that does not have an interpretation in the model.
-            </param>
-            <returns>The evaluation of <paramref name="t"/> in the model.</returns>        
-        </member>
-        <member name="M:Microsoft.Z3.Model.Evaluate(Microsoft.Z3.Expr,System.Boolean)">
-            <summary>
-            Alias for <c>Eval</c>.
-            </summary>        
-        </member>
-        <member name="M:Microsoft.Z3.Model.SortUniverse(Microsoft.Z3.Sort)">
-            <summary>
-            The finite set of distinct values that represent the interpretation for sort <paramref name="s"/>.
-            </summary>
-            <seealso cref="P:Microsoft.Z3.Model.Sorts"/>
-            <param name="s">An uninterpreted sort</param>
-            <returns>An array of expressions, where each is an element of the universe of <paramref name="s"/></returns>
-        </member>
-        <member name="M:Microsoft.Z3.Model.ToString">
-            <summary>
-            Conversion of models to strings. 
-            </summary>
-            <returns>A string representation of the model.</returns>
-        </member>
-        <member name="P:Microsoft.Z3.Model.NumConsts">
-            <summary>
-            The number of constants that have an interpretation in the model.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Model.ConstDecls">
-            <summary>
-            The function declarations of the constants in the model.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Model.NumFuncs">
-            <summary>
-            The number of function interpretations in the model.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Model.FuncDecls">
-            <summary>
-            The function declarations of the function interpretations in the model.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Model.Decls">
-            <summary>
-            All symbols that have an interpretation in the model.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Model.NumSorts">
-            <summary>
-            The number of uninterpreted sorts that the model has an interpretation for.
-            </summary>    
-        </member>
-        <member name="P:Microsoft.Z3.Model.Sorts">
-            <summary>
-            The uninterpreted sorts that the model has an interpretation for. 
-            </summary>
-            <remarks>
-            Z3 also provides an intepretation for uninterpreted sorts used in a formula.
-            The interpretation for a sort is a finite set of distinct values. We say this finite set is
-            the "universe" of the sort.
-            </remarks>
-            <seealso cref="P:Microsoft.Z3.Model.NumSorts"/>
-            <seealso cref="M:Microsoft.Z3.Model.SortUniverse(Microsoft.Z3.Sort)"/>
-        </member>
-        <member name="T:Microsoft.Z3.Model.ModelEvaluationFailedException">
-            <summary>
-            A ModelEvaluationFailedException is thrown when an expression cannot be evaluated by the model.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.Z3Exception">
-            <summary>
-            The exception base class for error reporting from Z3
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Z3Exception.#ctor">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Z3Exception.#ctor(System.String)">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Z3Exception.#ctor(System.String,System.Exception)">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Model.ModelEvaluationFailedException.#ctor">
-            <summary>
-            An exception that is thrown when model evaluation fails.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.IntNum">
-            <summary>
-            Integer Numerals
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.IntNum.ToString">
-            <summary>
-            Returns a string representation of the numeral.
-            </summary>        
-        </member>
-        <member name="P:Microsoft.Z3.IntNum.UInt64">
-            <summary>
-            Retrieve the 64-bit unsigned integer value.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.IntNum.Int">
-            <summary>
-            Retrieve the int value.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.IntNum.Int64">
-            <summary>
-            Retrieve the 64-bit int value.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.IntNum.UInt">
-            <summary>
-            Retrieve the int value.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.IntNum.BigInteger">
-            <summary>
-            Retrieve the BigInteger value.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.RatNum">
-            <summary>
-            Rational Numerals
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.RatNum.ToDecimalString(System.UInt32)">
-            <summary>
-            Returns a string representation in decimal notation.
-            </summary>
-            <remarks>The result has at most <paramref name="precision"/> decimal places.</remarks>    
-        </member>
-        <member name="M:Microsoft.Z3.RatNum.ToString">
-            <summary>
-            Returns a string representation of the numeral.
-            </summary>        
-        </member>
-        <member name="P:Microsoft.Z3.RatNum.Numerator">
-            <summary>
-            The numerator of a rational numeral.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.RatNum.Denominator">
-            <summary>
-            The denominator of a rational numeral.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.RatNum.BigIntNumerator">
-            <summary>
-            Converts the numerator of the rational to a BigInteger
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.RatNum.BigIntDenominator">
-            <summary>
-            Converts the denominator of the rational to a BigInteger
             </summary>
         </member>
         <member name="T:Microsoft.Z3.BitVecNum">
@@ -2215,197 +1690,70 @@
             Retrieve the BigInteger value.
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.AlgebraicNum">
+        <member name="T:Microsoft.Z3.BitVecSort">
             <summary>
-            Algebraic numbers
+            Bit-vector sorts.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.AlgebraicNum.ToUpper(System.UInt32)">
+        <member name="P:Microsoft.Z3.BitVecSort.Size">
             <summary>
-            Return a upper bound for a given real algebraic number. 
-            The interval isolating the number is smaller than 1/10^<paramref name="precision"/>.    
-            <seealso cref="P:Microsoft.Z3.Expr.IsAlgebraicNumber"/>   
-            </summary>
-            <param name="precision">the precision of the result</param>
-            <returns>A numeral Expr of sort Real</returns>
-        </member>
-        <member name="M:Microsoft.Z3.AlgebraicNum.ToLower(System.UInt32)">
-            <summary>
-            Return a lower bound for the given real algebraic number. 
-            The interval isolating the number is smaller than 1/10^<paramref name="precision"/>.    
-            <seealso cref="P:Microsoft.Z3.Expr.IsAlgebraicNumber"/>
-            </summary>
-            <param name="precision"></param>
-            <returns>A numeral Expr of sort Real</returns>
-        </member>
-        <member name="M:Microsoft.Z3.AlgebraicNum.ToDecimal(System.UInt32)">
-            <summary>
-            Returns a string representation in decimal notation.
-            </summary>
-            <remarks>The result has at most <paramref name="precision"/> decimal places.</remarks>    
-        </member>
-        <member name="T:Microsoft.Z3.Params">
-            <summary>
-            A ParameterSet represents a configuration in the form of Symbol/value pairs.
+            The size of the bit-vector sort.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Params.Add(Microsoft.Z3.Symbol,System.Boolean)">
+        <member name="T:Microsoft.Z3.BoolExpr">
             <summary>
-            Adds a parameter setting.
+            Boolean expressions
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Params.Add(Microsoft.Z3.Symbol,System.UInt32)">
+        <member name="M:Microsoft.Z3.BoolExpr.#ctor(Microsoft.Z3.Context)">
+            <summary> Constructor for BoolExpr </summary>
+        </member>
+        <member name="M:Microsoft.Z3.BoolExpr.#ctor(Microsoft.Z3.Context,System.IntPtr)">
+            <summary> Constructor for BoolExpr </summary>
+        </member>
+        <member name="T:Microsoft.Z3.BoolSort">
             <summary>
-            Adds a parameter setting.
+            A Boolean sort.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Params.Add(Microsoft.Z3.Symbol,System.Double)">
+        <member name="T:Microsoft.Z3.Constructor">
             <summary>
-            Adds a parameter setting.
+            Constructors are used for datatype sorts.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Params.Add(Microsoft.Z3.Symbol,Microsoft.Z3.Symbol)">
+        <member name="M:Microsoft.Z3.Constructor.Finalize">
             <summary>
-            Adds a parameter setting.
+            Destructor.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Params.Add(System.String,System.Boolean)">
+        <member name="P:Microsoft.Z3.Constructor.NumFields">
             <summary>
-            Adds a parameter setting.
+            The number of fields of the constructor.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Params.Add(System.String,System.UInt32)">
+        <member name="P:Microsoft.Z3.Constructor.ConstructorDecl">
             <summary>
-            Adds a parameter setting.
+            The function declaration of the constructor.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Params.Add(System.String,System.Double)">
+        <member name="P:Microsoft.Z3.Constructor.TesterDecl">
             <summary>
-            Adds a parameter setting.
+            The function declaration of the tester.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Params.Add(System.String,Microsoft.Z3.Symbol)">
+        <member name="P:Microsoft.Z3.Constructor.AccessorDecls">
             <summary>
-            Adds a parameter setting.
+            The function declarations of the accessors
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Params.ToString">
+        <member name="T:Microsoft.Z3.ConstructorList">
             <summary>
-            A string representation of the parameter set.
+            Lists of constructors
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.Pattern">
+        <member name="M:Microsoft.Z3.ConstructorList.Finalize">
             <summary>
-            Patterns comprise a list of terms. The list should be
-            non-empty.  If the list comprises of more than one term, it is
-            also called a multi-pattern.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Pattern.ToString">
-            <summary>
-            A string representation of the pattern.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Pattern.NumTerms">
-            <summary>
-            The number of terms in the pattern.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Pattern.Terms">
-            <summary>
-            The terms in the pattern.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.Statistics">
-            <summary>
-            Objects of this class track statistical information about solvers. 
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Statistics.ToString">
-            <summary>
-            A string representation of the statistical data.
-            </summary>    
-        </member>
-        <member name="P:Microsoft.Z3.Statistics.Size">
-            <summary>
-            The number of statistical data.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Statistics.Entries">
-            <summary>
-            The data entries.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Statistics.Keys">
-            <summary>
-            The statistical counters.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Statistics.Item(System.String)">
-            <summary>
-            The value of a particular statistical counter.
-            </summary>        
-            <remarks>Returns null if the key is unknown.</remarks>
-        </member>
-        <member name="T:Microsoft.Z3.Statistics.Entry">
-            <summary>
-            Statistical data is organized into pairs of [Key, Entry], where every
-            Entry is either a <c>DoubleEntry</c> or a <c>UIntEntry</c>
-            </summary>
-        </member>
-        <member name="F:Microsoft.Z3.Statistics.Entry.Key">
-            <summary>
-            The key of the entry.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Statistics.Entry.ToString">
-            <summary>
-            The string representation of the Entry.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Statistics.Entry.UIntValue">
-            <summary>
-            The uint-value of the entry.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Statistics.Entry.DoubleValue">
-            <summary>
-            The double-value of the entry.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Statistics.Entry.IsUInt">
-            <summary>
-            True if the entry is uint-valued.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Statistics.Entry.IsDouble">
-            <summary>
-            True if the entry is double-valued.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Statistics.Entry.Value">
-            <summary>
-            The string representation of the the entry's value.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.Status">
-            <summary>
-            Status values.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Z3.Status.UNSATISFIABLE">
-            <summary>
-            Used to signify an unsatisfiable status.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Z3.Status.UNKNOWN">
-            <summary>
-            Used to signify an unknown status.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Z3.Status.SATISFIABLE">
-            <summary>
-            Used to signify a satisfiable status.
+            Destructor.
             </summary>
         </member>
         <member name="T:Microsoft.Z3.Context">
@@ -2422,6 +1770,21 @@
             <summary>
             Constructor.
             </summary>
+            <remarks>
+            The following parameters can be set:        
+                - proof  (Boolean)           Enable proof generation
+                - debug_ref_count (Boolean)  Enable debug support for Z3_ast reference counting 
+                - trace  (Boolean)           Tracing support for VCC
+                - trace_file_name (String)   Trace out file for VCC traces
+                - timeout (unsigned)         default timeout (in milliseconds) used for solvers
+                - well_sorted_check          type checker
+                - auto_config                use heuristics to automatically select solver and configure it
+                - model                      model generation for solvers, this parameter can be overwritten when creating a solver
+                - model_validate             validate models produced by solvers
+                - unsat_core                 unsat-core generation for solvers, this parameter can be overwritten when creating a solver
+            Note that in previous versions of Z3, this constructor was also used to set global and module parameters. 
+            For this purpose we should now use <see cref="M:Microsoft.Z3.Global.SetParameter(System.String,System.String)"/>
+            </remarks>
         </member>
         <member name="M:Microsoft.Z3.Context.MkSymbol(System.Int32)">
             <summary>
@@ -2504,13 +1867,21 @@
         </member>
         <member name="M:Microsoft.Z3.Context.MkFiniteDomainSort(Microsoft.Z3.Symbol,System.UInt64)">
             <summary>
-            Create a new finite domain sort.
+            Create a new finite domain sort.	    
+            <returns>The result is a sort</returns>
             </summary>
+            <param name="name">The name used to identify the sort</param>
+            <param name="size">The size of the sort</param>
         </member>
         <member name="M:Microsoft.Z3.Context.MkFiniteDomainSort(System.String,System.UInt64)">
             <summary>
-            Create a new finite domain sort.
+            Create a new finite domain sort.	    
+            <returns>The result is a sort</returns>
+            Elements of the sort are created using <seealso cref="M:Microsoft.Z3.Context.MkNumeral(System.UInt64,Microsoft.Z3.Sort)"/>, 
+            and the elements range from 0 to <tt>size-1</tt>.
             </summary>
+            <param name="name">The name used to identify the sort</param>
+            <param name="size">The size of the sort</param>
         </member>
         <member name="M:Microsoft.Z3.Context.MkConstructor(Microsoft.Z3.Symbol,Microsoft.Z3.Symbol,Microsoft.Z3.Symbol[],Microsoft.Z3.Sort[],System.UInt32[])">
             <summary>
@@ -3340,12 +2711,12 @@
             Create a set type.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Context.MkEmptySet(Microsoft.Z3.SetSort)">
+        <member name="M:Microsoft.Z3.Context.MkEmptySet(Microsoft.Z3.Sort)">
             <summary>
             Create an empty set.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Context.MkFullSet(Microsoft.Z3.SetSort)">
+        <member name="M:Microsoft.Z3.Context.MkFullSet(Microsoft.Z3.Sort)">
             <summary>
             Create the full set.
             </summary>
@@ -3637,18 +3008,6 @@
             </summary>
             <seealso cref="M:Microsoft.Z3.Context.ParseSMTLIB2String(System.String,Microsoft.Z3.Symbol[],Microsoft.Z3.Sort[],Microsoft.Z3.Symbol[],Microsoft.Z3.FuncDecl[])"/>
         </member>
-        <member name="M:Microsoft.Z3.Context.ParseZ3String(System.String)">
-            <summary>
-            Parse the given string using the Z3 native parser.            
-            </summary>    
-            <returns>A conjunction of asserts made in <paramref name="str"/>.</returns>
-        </member>
-        <member name="M:Microsoft.Z3.Context.ParseZ3File(System.String)">
-            <summary>
-            Parse the given file using the Z3 native parser.            
-            </summary>    
-            <returns>A conjunction of asserts made in the file.</returns>
-        </member>
         <member name="M:Microsoft.Z3.Context.MkGoal(System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Creates a new Goal.
@@ -3785,7 +3144,7 @@
             Creates a new Probe.
             </summary>    
         </member>
-        <member name="M:Microsoft.Z3.Context.Const(System.Double)">
+        <member name="M:Microsoft.Z3.Context.ConstProbe(System.Double)">
             <summary>
             Create a probe that always evaluates to <paramref name="val"/>.
             </summary>
@@ -3873,6 +3232,31 @@
             Create a Fixedpoint context.
             </summary>
         </member>
+        <member name="M:Microsoft.Z3.Context.WrapAST(System.IntPtr)">
+            <summary>
+            Wraps an AST.
+            </summary>
+            <remarks>This function is used for transitions between native and 
+            managed objects. Note that <paramref name="nativeObject"/> must be a 
+            native object obtained from Z3 (e.g., through <seealso cref="M:Microsoft.Z3.Context.UnwrapAST(Microsoft.Z3.AST)"/>)
+            and that it must have a correct reference count (see e.g., 
+            <seealso cref="M:Microsoft.Z3.Native.Z3_inc_ref(System.IntPtr,System.IntPtr)"/>.</remarks>
+            <seealso cref="M:Microsoft.Z3.Context.UnwrapAST(Microsoft.Z3.AST)"/>
+            <param name="nativeObject">The native pointer to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Z3.Context.UnwrapAST(Microsoft.Z3.AST)">
+            <summary>
+            Unwraps an AST.
+            </summary>
+            <remarks>This function is used for transitions between native and 
+            managed objects. It returns the native pointer to the AST. Note that 
+            AST objects are reference counted and unwrapping an AST disables automatic
+            reference counting, i.e., all references to the IntPtr that is returned 
+            must be handled externally and through native calls (see e.g., 
+            <seealso cref="M:Microsoft.Z3.Native.Z3_inc_ref(System.IntPtr,System.IntPtr)"/>).</remarks>
+            <seealso cref="M:Microsoft.Z3.Context.WrapAST(System.IntPtr)"/>
+            <param name="a">The AST to unwrap.</param>
+        </member>
         <member name="M:Microsoft.Z3.Context.SimplifyHelp">
             <summary>
             Return a string describing all available parameters to <c>Expr.Simplify</c>.
@@ -3891,20 +3275,10 @@
             </summary>
             <remarks>
             The list of all configuration parameters can be obtained using the Z3 executable:
-            <c>z3.exe -ini?</c>
+            <c>z3.exe -p</c>
             Only a few configuration parameters are mutable once the context is created.
             An exception is thrown when trying to modify an immutable parameter.
             </remarks>
-            <seealso cref="M:Microsoft.Z3.Context.GetParamValue(System.String)"/>
-        </member>
-        <member name="M:Microsoft.Z3.Context.GetParamValue(System.String)">
-            <summary>
-            Get a configuration parameter.
-            </summary>
-            <remarks>
-            Returns null if the parameter value does not exist.
-            </remarks>
-            <seealso cref="M:Microsoft.Z3.Context.UpdateParamValue(System.String,System.String)"/>
         </member>
         <member name="M:Microsoft.Z3.Context.Finalize">
             <summary>
@@ -4009,164 +3383,781 @@
             The names of all supported Probes.
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.Probe">
-            <summary>  
-            Probes are used to inspect a goal (aka problem) and collect information that may be used to decide
-            which solver and/or preprocessing step will be used.
-            The complete list of probes may be obtained using the procedures <c>Context.NumProbes</c>
-            and <c>Context.ProbeNames</c>.
-            It may also be obtained using the command <c>(help-tactics)</c> in the SMT 2.0 front-end.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Probe.Apply(Microsoft.Z3.Goal)">
+        <member name="P:Microsoft.Z3.Context.SimplifyParameterDescriptions">
             <summary>
-            Execute the probe over the goal. 
+            Retrieves parameter descriptions for simplifier.
             </summary>
-            <returns>A probe always produce a double value.
-            "Boolean" probes return 0.0 for false, and a value different from 0.0 for true.</returns>
         </member>
-        <member name="P:Microsoft.Z3.Probe.Item(Microsoft.Z3.Goal)">
+        <member name="T:Microsoft.Z3.DatatypeExpr">
             <summary>
-            Apply the probe to a goal.
+            Datatype expressions
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.Solver">
+        <member name="M:Microsoft.Z3.DatatypeExpr.#ctor(Microsoft.Z3.Context)">
+            <summary> Constructor for DatatypeExpr </summary>
+        </member>
+        <member name="T:Microsoft.Z3.DatatypeSort">
             <summary>
-            Solvers.
+            Datatype sorts.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Solver.Push">
+        <member name="P:Microsoft.Z3.DatatypeSort.NumConstructors">
+            <summary>
+            The number of constructors of the datatype sort.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.DatatypeSort.Constructors">
+            <summary>
+            The constructors.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.DatatypeSort.Recognizers">
+            <summary>
+            The recognizers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.DatatypeSort.Accessors">
+            <summary>
+            The constructor accessors.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_lbool">
+            <summary>Z3_lbool</summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_symbol_kind">
+            <summary>Z3_symbol_kind</summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_parameter_kind">
+            <summary>Z3_parameter_kind</summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_sort_kind">
+            <summary>Z3_sort_kind</summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_ast_kind">
+            <summary>Z3_ast_kind</summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_decl_kind">
+            <summary>Z3_decl_kind</summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_param_kind">
+            <summary>Z3_param_kind</summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_ast_print_mode">
+            <summary>Z3_ast_print_mode</summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_error_code">
+            <summary>Z3_error_code</summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3_goal_prec">
+            <summary>Z3_goal_prec</summary>
+        </member>
+        <member name="T:Microsoft.Z3.EnumSort">
+            <summary>
+            Enumeration sorts.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.EnumSort.ConstDecls">
+            <summary>
+            The function declarations of the constants in the enumeration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.EnumSort.Consts">
+            <summary>
+            The constants in the enumeration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.EnumSort.TesterDecls">
+            <summary>
+            The test predicates for the constants in the enumeration.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.FiniteDomainSort">
+            <summary>
+            Finite domain sorts.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FiniteDomainSort.Size">
+            <summary>
+            The size of the finite domain sort.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Fixedpoint">
+            <summary>
+            Object for managing fixedpoints
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.Assert(Microsoft.Z3.BoolExpr[])">
+            <summary>
+            Assert a constraint (or multiple) into the fixedpoint solver.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.Add(Microsoft.Z3.BoolExpr[])">
+            <summary>
+            Alias for Assert.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.RegisterRelation(Microsoft.Z3.FuncDecl)">
+            <summary>
+            Register predicate as recursive relation.
+            </summary>       
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.AddRule(Microsoft.Z3.BoolExpr,Microsoft.Z3.Symbol)">
+            <summary>
+            Add rule into the fixedpoint solver.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.AddFact(Microsoft.Z3.FuncDecl,System.UInt32[])">
+            <summary>
+            Add table fact to the fixedpoint solver.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.Query(Microsoft.Z3.BoolExpr)">
+            <summary>
+            Query the fixedpoint solver.
+            A query is a conjunction of constraints. The constraints may include the recursively defined relations.
+            The query is satisfiable if there is an instance of the query variables and a derivation for it.
+            The query is unsatisfiable if there are no derivations satisfying the query variables. 
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.Query(Microsoft.Z3.FuncDecl[])">
+            <summary>
+            Query the fixedpoint solver.
+            A query is an array of relations.
+            The query is satisfiable if there is an instance of some relation that is non-empty.
+            The query is unsatisfiable if there are no derivations satisfying any of the relations.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.Push">
             <summary>
             Creates a backtracking point.
             </summary>
-            <seealso cref="M:Microsoft.Z3.Solver.Pop(System.UInt32)"/>
+            <seealso cref="M:Microsoft.Z3.Fixedpoint.Pop"/>
         </member>
-        <member name="M:Microsoft.Z3.Solver.Pop(System.UInt32)">
+        <member name="M:Microsoft.Z3.Fixedpoint.Pop">
             <summary>
-            Backtracks <paramref name="n"/> backtracking points.
+            Backtrack one backtracking point.
             </summary>
-            <remarks>Note that an exception is thrown if <paramref name="n"/> is not smaller than <c>NumScopes</c></remarks>
-            <seealso cref="M:Microsoft.Z3.Solver.Push"/>
+            <remarks>Note that an exception is thrown if Pop is called without a corresponding <c>Push</c></remarks>
+            <seealso cref="M:Microsoft.Z3.Fixedpoint.Push"/>
         </member>
-        <member name="M:Microsoft.Z3.Solver.Reset">
+        <member name="M:Microsoft.Z3.Fixedpoint.UpdateRule(Microsoft.Z3.BoolExpr,Microsoft.Z3.Symbol)">
             <summary>
-            Resets the Solver.
-            </summary>
-            <remarks>This removes all assertions from the solver.</remarks>
-        </member>
-        <member name="M:Microsoft.Z3.Solver.Assert(Microsoft.Z3.BoolExpr[])">
-            <summary>
-            Assert a constraint (or multiple) into the solver.
+            Update named rule into in the fixedpoint solver.
             </summary>        
         </member>
-        <member name="M:Microsoft.Z3.Solver.Check(Microsoft.Z3.Expr[])">
+        <member name="M:Microsoft.Z3.Fixedpoint.GetAnswer">
             <summary>
-            Checks whether the assertions in the solver are consistent or not.
+            Retrieve satisfying instance or instances of solver, 
+            or definitions for the recursive predicates that show unsatisfiability.
+            </summary>                
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.GetReasonUnknown">
+            <summary>
+            Retrieve explanation why fixedpoint engine returned status Unknown.
+            </summary>                
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.GetNumLevels(Microsoft.Z3.FuncDecl)">
+            <summary>
+            Retrieve the number of levels explored for a given predicate.
+            </summary>                
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.GetCoverDelta(System.Int32,Microsoft.Z3.FuncDecl)">
+            <summary>
+            Retrieve the cover of a predicate.
+            </summary>                
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.AddCover(System.Int32,Microsoft.Z3.FuncDecl,Microsoft.Z3.Expr)">
+            <summary>
+            Add <tt>property</tt> about the <tt>predicate</tt>.
+            The property is added at <tt>level</tt>.
+            </summary>                
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.ToString">
+            <summary>
+            Retrieve internal string representation of fixedpoint object.
+            </summary>                
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.SetPredicateRepresentation(Microsoft.Z3.FuncDecl,Microsoft.Z3.Symbol[])">
+            <summary>
+            Instrument the Datalog engine on which table representation to use for recursive predicate.
+            </summary>                
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.ToString(Microsoft.Z3.BoolExpr[])">
+            <summary>
+            Convert benchmark given as set of axioms, rules and queries to a string.
+            </summary>                
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.ParseFile(System.String)">
+            <summary>
+            Parse an SMT-LIB2 file with fixedpoint rules. 
+            Add the rules to the current fixedpoint context. 
+            Return the set of queries in the file.
+            </summary>                
+        </member>
+        <member name="M:Microsoft.Z3.Fixedpoint.ParseString(System.String)">
+            <summary>
+            Similar to ParseFile. Instead it takes as argument a string.
+            </summary>                
+        </member>
+        <member name="P:Microsoft.Z3.Fixedpoint.Help">
+            <summary>
+            A string that describes all available fixedpoint solver parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Fixedpoint.Parameters">
+            <summary>
+            Sets the fixedpoint solver parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Fixedpoint.ParameterDescriptions">
+            <summary>
+            Retrieves parameter descriptions for Fixedpoint solver.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Fixedpoint.Rules">
+            <summary>
+            Retrieve set of rules added to fixedpoint context.
+            </summary>                
+        </member>
+        <member name="P:Microsoft.Z3.Fixedpoint.Assertions">
+            <summary>
+            Retrieve set of assertions added to fixedpoint context.
+            </summary>                
+        </member>
+        <member name="T:Microsoft.Z3.FuncDecl">
+            <summary>
+            Function declarations. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.FuncDecl.op_Equality(Microsoft.Z3.FuncDecl,Microsoft.Z3.FuncDecl)">
+            <summary>
+            Comparison operator.
+            </summary>
+            <returns>True if <paramref name="a"/> and <paramref name="b"/> share the same context and are equal, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Z3.FuncDecl.op_Inequality(Microsoft.Z3.FuncDecl,Microsoft.Z3.FuncDecl)">
+            <summary>
+            Comparison operator.
+            </summary>
+            <returns>True if <paramref name="a"/> and <paramref name="b"/> do not share the same context or are not equal, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Z3.FuncDecl.Equals(System.Object)">
+            <summary>
+            Object comparison.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.FuncDecl.GetHashCode">
+            <summary>
+            A hash code.
+            </summary>    
+        </member>
+        <member name="M:Microsoft.Z3.FuncDecl.ToString">
+            <summary>
+            A string representations of the function declaration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.FuncDecl.Apply(Microsoft.Z3.Expr[])">
+            <summary>
+            Create expression that applies function to arguments.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Id">
+            <summary>
+            Returns a unique identifier for the function declaration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Arity">
+            <summary>
+            The arity of the function declaration
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.DomainSize">
+            <summary>
+            The size of the domain of the function declaration
+            <seealso cref="P:Microsoft.Z3.FuncDecl.Arity"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Domain">
+            <summary>
+            The domain of the function declaration
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Range">
+            <summary>
+            The range of the function declaration
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.DeclKind">
+            <summary>
+            The kind of the function declaration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Name">
+            <summary>
+            The name of the function declaration
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.NumParameters">
+            <summary>
+            The number of parameters of the function declaration
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Parameters">
+            <summary>
+            The parameters of the function declaration
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Item(Microsoft.Z3.Expr[])">
+            <summary>
+            Create expression that applies function to arguments.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Z3.FuncDecl.Parameter">
+            <summary>
+            Function declarations can have Parameters associated with them. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Int">
+            <summary>The int value of the parameter.</summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Double">
+            <summary>The double value of the parameter.</summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Symbol">
+            <summary>The Symbol value of the parameter.</summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Sort">
+            <summary>The Sort value of the parameter.</summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Parameter.AST">
+            <summary>The AST value of the parameter.</summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Parameter.FuncDecl">
+            <summary>The FunctionDeclaration value of the parameter.</summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Parameter.Rational">
+            <summary>The rational string value of the parameter.</summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncDecl.Parameter.ParameterKind">
+            <summary>
+            The kind of the parameter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.FuncInterp">
+            <summary>
+             A function interpretation is represented as a finite map and an 'else' value.
+             Each entry in the finite map represents the value of a function given a set of arguments.  
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.FuncInterp.ToString">
+            <summary>
+            A string representation of the function interpretation.
+            </summary>    
+        </member>
+        <member name="P:Microsoft.Z3.FuncInterp.NumEntries">
+            <summary>
+            The number of entries in the function interpretation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncInterp.Entries">
+            <summary>
+            The entries in the function interpretation
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncInterp.Else">
+            <summary>
+            The (symbolic) `else' value of the function interpretation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncInterp.Arity">
+            <summary>
+            The arity of the function interpretation
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.FuncInterp.Entry">
+            <summary>
+            An Entry object represents an element in the finite map used to encode
+            a function interpretation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.FuncInterp.Entry.ToString">
+            <summary>
+            A string representation of the function entry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncInterp.Entry.Value">
+            <summary>
+            Return the (symbolic) value of this entry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncInterp.Entry.NumArgs">
+            <summary>
+            The number of arguments of the entry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.FuncInterp.Entry.Args">
+            <summary>
+            The arguments of the function entry.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Global">
+            <summary>
+            Global functions for Z3. 
             </summary>
             <remarks>
-            <seealso cref="P:Microsoft.Z3.Solver.Model"/>
-            <seealso cref="P:Microsoft.Z3.Solver.UnsatCore"/>
-            <seealso cref="P:Microsoft.Z3.Solver.Proof"/>    
-            </remarks>    
+            This (static) class contains functions that effect the behaviour of Z3
+            globally across contexts, etc. 
+            </remarks>
         </member>
-        <member name="M:Microsoft.Z3.Solver.ToString">
+        <member name="M:Microsoft.Z3.Global.SetParameter(System.String,System.String)">
             <summary>
-            A string representation of the solver.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Solver.Help">
-            <summary>
-            A string that describes all available solver parameters.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Solver.Parameters">
-            <summary>
-            Sets the solver parameters.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Solver.NumScopes">
-            <summary>
-            The current number of backtracking points (scopes).
-            </summary>
-            <seealso cref="M:Microsoft.Z3.Solver.Pop(System.UInt32)"/>
-            <seealso cref="M:Microsoft.Z3.Solver.Push"/>
-        </member>
-        <member name="P:Microsoft.Z3.Solver.NumAssertions">
-            <summary>
-            The number of assertions in the solver.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Solver.Assertions">
-            <summary>
-            The set of asserted formulas.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Solver.Model">
-            <summary>
-            The model of the last <c>Check</c>.
+            Set a global (or module) parameter, which is shared by all Z3 contexts.
             </summary>
             <remarks>
-            The result is <c>null</c> if <c>Check</c> was not invoked before,
-            if its results was not <c>SATISFIABLE</c>, or if model production is not enabled.
+            When a Z3 module is initialized it will use the value of these parameters
+            when Z3_params objects are not provided.
+            The name of parameter can be composed of characters [a-z][A-Z], digits [0-9], '-' and '_'. 
+            The character '.' is a delimiter (more later).
+            The parameter names are case-insensitive. The character '-' should be viewed as an "alias" for '_'.
+            Thus, the following parameter names are considered equivalent: "pp.decimal-precision"  and "PP.DECIMAL_PRECISION".
+            This function can be used to set parameters for a specific Z3 module.
+            This can be done by using [module-name].[parameter-name].
+            For example:
+            Z3_global_param_set('pp.decimal', 'true')
+            will set the parameter "decimal" in the module "pp" to true.
             </remarks>
         </member>
-        <member name="P:Microsoft.Z3.Solver.Proof">
+        <member name="M:Microsoft.Z3.Global.GetParameter(System.String)">
             <summary>
-            The proof of the last <c>Check</c>.
+            Get a global (or module) parameter.
             </summary>
-            <remarks>    
-            The result is <c>null</c> if <c>Check</c> was not invoked before,
-            if its results was not <c>UNSATISFIABLE</c>, or if proof production is disabled.
+            <remarks>               
+            Returns null if the parameter <param name="id"/> does not exist.
+            The caller must invoke #Z3_global_param_del_value to delete the value returned at \c param_value.
+            This function cannot be invoked simultaneously from different threads without synchronization.
+            The result string stored in param_value is stored in a shared location.
             </remarks>
         </member>
-        <member name="P:Microsoft.Z3.Solver.UnsatCore">
+        <member name="M:Microsoft.Z3.Global.ResetParameters">
             <summary>
-            The unsat core of the last <c>Check</c>.
+            Restore the value of all global (and module) parameters.
             </summary>
             <remarks>
-            The unsat core is a subset of <c>Assertions</c>
-            The result is empty if <c>Check</c> was not invoked before,
-            if its results was not <c>UNSATISFIABLE</c>, or if core production is disabled.
+            This command will not affect already created objects (such as tactics and solvers)
+            </remarks>
+            <seealso cref="M:Microsoft.Z3.Global.SetParameter(System.String,System.String)"/>
+        </member>
+        <member name="T:Microsoft.Z3.Goal">
+            <summary>
+            A goal (aka problem). A goal is essentially a set
+            of formulas, that can be solved and/or transformed using
+            tactics and solvers.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Goal.Assert(Microsoft.Z3.BoolExpr[])">
+            <summary>
+            Adds the <paramref name="constraints"/> to the given goal. 
+            </summary>   
+        </member>
+        <member name="M:Microsoft.Z3.Goal.Add(Microsoft.Z3.BoolExpr[])">
+            <summary>
+            Alias for Assert.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Goal.Reset">
+            <summary>
+            Erases all formulas from the given goal.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Goal.Translate(Microsoft.Z3.Context)">
+            <summary>
+            Translates (copies) the Goal to the target Context <paramref name="ctx"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Goal.Simplify(Microsoft.Z3.Params)">
+            <summary>
+            Simplifies the goal.
+            </summary>
+            <remarks>Essentially invokes the `simplify' tactic on the goal.</remarks>
+        </member>
+        <member name="M:Microsoft.Z3.Goal.ToString">
+            <summary>
+            Goal to string conversion.
+            </summary>
+            <returns>A string representation of the Goal.</returns>
+        </member>
+        <member name="P:Microsoft.Z3.Goal.Precision">
+            <summary>
+            The precision of the goal. 
+            </summary>
+            <remarks>
+            Goals can be transformed using over and under approximations.
+            An under approximation is applied when the objective is to find a model for a given goal.
+            An over approximation is applied when the objective is to find a proof for a given goal.
             </remarks>
         </member>
-        <member name="P:Microsoft.Z3.Solver.ReasonUnknown">
+        <member name="P:Microsoft.Z3.Goal.IsPrecise">
             <summary>
-            A brief justification of why the last call to <c>Check</c> returned <c>UNKNOWN</c>.
+            Indicates whether the goal is precise.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.Solver.Statistics">
+        <member name="P:Microsoft.Z3.Goal.IsUnderApproximation">
             <summary>
-            Solver statistics.
+            Indicates whether the goal is an under-approximation.
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.Tactic">
+        <member name="P:Microsoft.Z3.Goal.IsOverApproximation">
             <summary>
-            Tactics are the basic building block for creating custom solvers for specific problem domains.
-            The complete list of tactics may be obtained using <c>Context.NumTactics</c> 
-            and <c>Context.TacticNames</c>.
-            It may also be obtained using the command <c>(help-tactics)</c> in the SMT 2.0 front-end.
+            Indicates whether the goal is an over-approximation.
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Tactic.Apply(Microsoft.Z3.Goal,Microsoft.Z3.Params)">
+        <member name="P:Microsoft.Z3.Goal.IsGarbage">
             <summary>
-            Execute the tactic over the goal. 
+            Indicates whether the goal is garbage (i.e., the product of over- and under-approximations).
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.Tactic.Help">
+        <member name="P:Microsoft.Z3.Goal.Inconsistent">
             <summary>
-            A string containing a description of parameters accepted by the tactic.
+            Indicates whether the goal contains `false'.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.Tactic.Item(Microsoft.Z3.Goal)">
+        <member name="P:Microsoft.Z3.Goal.Depth">
             <summary>
-            Apply the tactic to a goal.
+            The depth of the goal.
+            </summary>
+            <remarks>
+            This tracks how many transformations were applied to it.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Z3.Goal.Size">
+            <summary>
+            The number of formulas in the goal.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.Tactic.Solver">
+        <member name="P:Microsoft.Z3.Goal.Formulas">
             <summary>
-            Creates a solver that is implemented using the given tactic.
+            The formulas in the goal.
             </summary>
-            <seealso cref="M:Microsoft.Z3.Context.MkSolver(Microsoft.Z3.Tactic)"/>
+        </member>
+        <member name="P:Microsoft.Z3.Goal.NumExprs">
+            <summary>
+            The number of formulas, subformulas and terms in the goal.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Goal.IsDecidedSat">
+            <summary>
+            Indicates whether the goal is empty, and it is precise or the product of an under approximation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Goal.IsDecidedUnsat">
+            <summary>
+            Indicates whether the goal contains `false', and it is precise or the product of an over approximation.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.InterpolationContext">
+            <summary>
+            The InterpolationContext is suitable for generation of interpolants.
+            </summary>
+            <remarks>For more information on interpolation please refer
+            too the C/C++ API, which is well documented.</remarks>
+        </member>
+        <member name="M:Microsoft.Z3.InterpolationContext.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.InterpolationContext.#ctor(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Constructor.
+            </summary>
+            <remarks><seealso cref="M:Microsoft.Z3.Context.#ctor(System.Collections.Generic.Dictionary{System.String,System.String})"/></remarks>
+        </member>
+        <member name="M:Microsoft.Z3.InterpolationContext.MkInterpolant(Microsoft.Z3.BoolExpr)">
+            <summary>
+            Create an expression that marks a formula position for interpolation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.InterpolationContext.GetInterpolant(Microsoft.Z3.Expr,Microsoft.Z3.Expr,Microsoft.Z3.Params)">
+            <summary> 
+            Computes an interpolant.
+            </summary>    
+            <remarks>For more information on interpolation please refer
+            too the function Z3_get_interpolant in the C/C++ API, which is 
+            well documented.</remarks>
+        </member>
+        <member name="M:Microsoft.Z3.InterpolationContext.ComputeInterpolant(Microsoft.Z3.Expr,Microsoft.Z3.Params,Microsoft.Z3.ASTVector@,Microsoft.Z3.Model@)">
+            <summary> 
+            Computes an interpolant.
+            </summary>    
+            <remarks>For more information on interpolation please refer
+            too the function Z3_compute_interpolant in the C/C++ API, which is 
+            well documented.</remarks>
+        </member>
+        <member name="M:Microsoft.Z3.InterpolationContext.InterpolationProfile">
+            <summary> 
+            Return a string summarizing cumulative time used for interpolation.
+            </summary>    
+            <remarks>For more information on interpolation please refer
+            too the function Z3_interpolation_profile in the C/C++ API, which is 
+            well documented.</remarks>
+        </member>
+        <member name="M:Microsoft.Z3.InterpolationContext.CheckInterpolant(Microsoft.Z3.Expr[],System.UInt32[],Microsoft.Z3.Expr[],System.String@,Microsoft.Z3.Expr[])">
+            <summary> 
+            Checks the correctness of an interpolant.
+            </summary>    
+            <remarks>For more information on interpolation please refer
+            too the function Z3_check_interpolant in the C/C++ API, which is 
+            well documented.</remarks>
+        </member>
+        <member name="M:Microsoft.Z3.InterpolationContext.ReadInterpolationProblem(System.String,Microsoft.Z3.Expr[]@,System.UInt32[]@,System.String@,Microsoft.Z3.Expr[]@)">
+            <summary> 
+            Reads an interpolation problem from a file.
+            </summary>    
+            <remarks>For more information on interpolation please refer
+            too the function Z3_read_interpolation_problem in the C/C++ API, which is 
+            well documented.</remarks>
+        </member>
+        <member name="M:Microsoft.Z3.InterpolationContext.WriteInterpolationProblem(System.String,Microsoft.Z3.Expr[],System.UInt32[],Microsoft.Z3.Expr[])">
+            <summary> 
+            Writes an interpolation problem to a file.
+            </summary>    
+            <remarks>For more information on interpolation please refer
+            too the function Z3_write_interpolation_problem in the C/C++ API, which is 
+            well documented.</remarks>
+        </member>
+        <member name="T:Microsoft.Z3.IntExpr">
+            <summary>
+            Int expressions
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.IntExpr.#ctor(Microsoft.Z3.Context)">
+            <summary> Constructor for IntExpr </summary>
+        </member>
+        <member name="T:Microsoft.Z3.IntNum">
+            <summary>
+            Integer Numerals
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.IntNum.ToString">
+            <summary>
+            Returns a string representation of the numeral.
+            </summary>        
+        </member>
+        <member name="P:Microsoft.Z3.IntNum.UInt64">
+            <summary>
+            Retrieve the 64-bit unsigned integer value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.IntNum.Int">
+            <summary>
+            Retrieve the int value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.IntNum.Int64">
+            <summary>
+            Retrieve the 64-bit int value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.IntNum.UInt">
+            <summary>
+            Retrieve the int value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.IntNum.BigInteger">
+            <summary>
+            Retrieve the BigInteger value.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.IntSort">
+            <summary>
+             An Integer sort
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.IntSymbol">
+            <summary>
+            Numbered symbols
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Symbol">
+            <summary>
+            Symbols are used to name several term and type constructors.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Symbol.IsIntSymbol">
+            <summary>
+            Indicates whether the symbol is of Int kind
+            </summary>    
+        </member>
+        <member name="M:Microsoft.Z3.Symbol.IsStringSymbol">
+            <summary>
+            Indicates whether the symbol is of string kind.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Symbol.ToString">
+            <summary>
+            A string representation of the symbol.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Symbol.#ctor(Microsoft.Z3.Context,System.IntPtr)">
+            <summary>
+            Symbol constructor
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Symbol.Kind">
+            <summary>
+            The kind of the symbol (int or string)
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.IntSymbol.Int">
+            <summary>
+            The int value of the symbol.
+            </summary>
+            <remarks>Throws an exception if the symbol is not of int kind. </remarks>
+        </member>
+        <member name="T:Microsoft.Z3.ListSort">
+            <summary>
+            List sorts.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ListSort.NilDecl">
+            <summary>
+            The declaration of the nil function of this list sort.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ListSort.Nil">
+            <summary>
+            The empty list.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ListSort.IsNilDecl">
+            <summary>
+            The declaration of the isNil function of this list sort.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ListSort.ConsDecl">
+            <summary>
+            The declaration of the cons function of this list sort.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ListSort.IsConsDecl">
+            <summary>
+            The declaration of the isCons function of this list sort.
+            </summary>
+            
+        </member>
+        <member name="P:Microsoft.Z3.ListSort.HeadDecl">
+            <summary>
+            The declaration of the head function of this list sort.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ListSort.TailDecl">
+            <summary>
+            The declaration of the tail function of this list sort.
+            </summary>
         </member>
         <member name="T:Microsoft.Z3.Log">
             <summary>
@@ -4199,6 +4190,272 @@
             Checks whether the interaction log is opened.
             </summary>
             <returns>True if the interaction log is open, false otherwise.</returns>
+        </member>
+        <member name="T:Microsoft.Z3.Model">
+            <summary>
+            A Model contains interpretations (assignments) of constants and functions. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Model.ConstInterp(Microsoft.Z3.Expr)">
+            <summary>
+            Retrieves the interpretation (the assignment) of <paramref name="a"/> in the model. 
+            </summary>
+            <param name="a">A Constant</param>
+            <returns>An expression if the constant has an interpretation in the model, null otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Z3.Model.ConstInterp(Microsoft.Z3.FuncDecl)">
+            <summary>
+            Retrieves the interpretation (the assignment) of <paramref name="f"/> in the model. 
+            </summary>
+            <param name="f">A function declaration of zero arity</param>
+            <returns>An expression if the function has an interpretation in the model, null otherwise.</returns>    
+        </member>
+        <member name="M:Microsoft.Z3.Model.FuncInterp(Microsoft.Z3.FuncDecl)">
+            <summary>
+            Retrieves the interpretation (the assignment) of a non-constant <paramref name="f"/> in the model. 
+            </summary>
+            <param name="f">A function declaration of non-zero arity</param>
+            <returns>A FunctionInterpretation if the function has an interpretation in the model, null otherwise.</returns> 
+        </member>
+        <member name="M:Microsoft.Z3.Model.Eval(Microsoft.Z3.Expr,System.Boolean)">
+            <summary>
+            Evaluates the expression <paramref name="t"/> in the current model.
+            </summary>
+            <remarks>
+            This function may fail if <paramref name="t"/> contains quantifiers, 
+            is partial (MODEL_PARTIAL enabled), or if <paramref name="t"/> is not well-sorted.
+            In this case a <c>ModelEvaluationFailedException</c> is thrown.
+            </remarks>
+            <param name="t">An expression</param>
+            <param name="completion">
+            When this flag is enabled, a model value will be assigned to any constant 
+            or function that does not have an interpretation in the model.
+            </param>
+            <returns>The evaluation of <paramref name="t"/> in the model.</returns>        
+        </member>
+        <member name="M:Microsoft.Z3.Model.Evaluate(Microsoft.Z3.Expr,System.Boolean)">
+            <summary>
+            Alias for <c>Eval</c>.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Model.SortUniverse(Microsoft.Z3.Sort)">
+            <summary>
+            The finite set of distinct values that represent the interpretation for sort <paramref name="s"/>.
+            </summary>
+            <seealso cref="P:Microsoft.Z3.Model.Sorts"/>
+            <param name="s">An uninterpreted sort</param>
+            <returns>An array of expressions, where each is an element of the universe of <paramref name="s"/></returns>
+        </member>
+        <member name="M:Microsoft.Z3.Model.ToString">
+            <summary>
+            Conversion of models to strings. 
+            </summary>
+            <returns>A string representation of the model.</returns>
+        </member>
+        <member name="P:Microsoft.Z3.Model.NumConsts">
+            <summary>
+            The number of constants that have an interpretation in the model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Model.ConstDecls">
+            <summary>
+            The function declarations of the constants in the model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Model.NumFuncs">
+            <summary>
+            The number of function interpretations in the model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Model.FuncDecls">
+            <summary>
+            The function declarations of the function interpretations in the model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Model.Decls">
+            <summary>
+            All symbols that have an interpretation in the model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Model.NumSorts">
+            <summary>
+            The number of uninterpreted sorts that the model has an interpretation for.
+            </summary>    
+        </member>
+        <member name="P:Microsoft.Z3.Model.Sorts">
+            <summary>
+            The uninterpreted sorts that the model has an interpretation for. 
+            </summary>
+            <remarks>
+            Z3 also provides an intepretation for uninterpreted sorts used in a formula.
+            The interpretation for a sort is a finite set of distinct values. We say this finite set is
+            the "universe" of the sort.
+            </remarks>
+            <seealso cref="P:Microsoft.Z3.Model.NumSorts"/>
+            <seealso cref="M:Microsoft.Z3.Model.SortUniverse(Microsoft.Z3.Sort)"/>
+        </member>
+        <member name="T:Microsoft.Z3.Model.ModelEvaluationFailedException">
+            <summary>
+            A ModelEvaluationFailedException is thrown when an expression cannot be evaluated by the model.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Z3Exception">
+            <summary>
+            The exception base class for error reporting from Z3
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Z3Exception.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Z3Exception.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Z3Exception.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Model.ModelEvaluationFailedException.#ctor">
+            <summary>
+            An exception that is thrown when model evaluation fails.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.ParamDescrs">
+            <summary>
+            A ParamDescrs describes a set of parameters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.ParamDescrs.Validate(Microsoft.Z3.Params)">
+            <summary>
+            validate a set of parameters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.ParamDescrs.GetKind(Microsoft.Z3.Symbol)">
+            <summary>
+            Retrieve kind of parameter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.ParamDescrs.ToString">
+            <summary>
+            Retrieves a string representation of the ParamDescrs. 
+            </summary>    
+        </member>
+        <member name="P:Microsoft.Z3.ParamDescrs.Names">
+            <summary>
+            Retrieve all names of parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.ParamDescrs.Size">
+            <summary>
+            The size of the ParamDescrs.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Params">
+            <summary>
+            A ParameterSet represents a configuration in the form of Symbol/value pairs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(Microsoft.Z3.Symbol,System.Boolean)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(Microsoft.Z3.Symbol,System.UInt32)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(Microsoft.Z3.Symbol,System.Double)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(Microsoft.Z3.Symbol,System.String)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(Microsoft.Z3.Symbol,Microsoft.Z3.Symbol)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(System.String,System.Boolean)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(System.String,System.UInt32)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(System.String,System.Double)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(System.String,Microsoft.Z3.Symbol)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.Add(System.String,System.String)">
+            <summary>
+            Adds a parameter setting.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Params.ToString">
+            <summary>
+            A string representation of the parameter set.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Pattern">
+            <summary>
+            Patterns comprise a list of terms. The list should be
+            non-empty.  If the list comprises of more than one term, it is
+            also called a multi-pattern.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Pattern.ToString">
+            <summary>
+            A string representation of the pattern.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Pattern.NumTerms">
+            <summary>
+            The number of terms in the pattern.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Pattern.Terms">
+            <summary>
+            The terms in the pattern.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Probe">
+            <summary>  
+            Probes are used to inspect a goal (aka problem) and collect information that may be used to decide
+            which solver and/or preprocessing step will be used.
+            The complete list of probes may be obtained using the procedures <c>Context.NumProbes</c>
+            and <c>Context.ProbeNames</c>.
+            It may also be obtained using the command <c>(help-tactics)</c> in the SMT 2.0 front-end.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Probe.Apply(Microsoft.Z3.Goal)">
+            <summary>
+            Execute the probe over the goal. 
+            </summary>
+            <returns>A probe always produce a double value.
+            "Boolean" probes return 0.0 for false, and a value different from 0.0 for true.</returns>
+        </member>
+        <member name="P:Microsoft.Z3.Probe.Item(Microsoft.Z3.Goal)">
+            <summary>
+            Apply the probe to a goal.
+            </summary>
         </member>
         <member name="T:Microsoft.Z3.Quantifier">
             <summary>
@@ -4260,80 +4517,48 @@
             The body of the quantifier.
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.Sort">
+        <member name="T:Microsoft.Z3.RatNum">
             <summary>
-            The Sort class implements type information for ASTs.
+            Rational Numerals
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Sort.op_Equality(Microsoft.Z3.Sort,Microsoft.Z3.Sort)">
+        <member name="T:Microsoft.Z3.RealExpr">
             <summary>
-            Comparison operator.
-            </summary>
-            <param name="a">A Sort</param>
-            <param name="b">A Sort</param>
-            <returns>True if <paramref name="a"/> and <paramref name="b"/> are from the same context 
-            and represent the same sort; false otherwise.</returns>
-        </member>
-        <member name="M:Microsoft.Z3.Sort.op_Inequality(Microsoft.Z3.Sort,Microsoft.Z3.Sort)">
-            <summary>
-            Comparison operator.
-            </summary>
-            <param name="a">A Sort</param>
-            <param name="b">A Sort</param>
-            <returns>True if <paramref name="a"/> and <paramref name="b"/> are not from the same context 
-            or represent different sorts; false otherwise.</returns>
-        </member>
-        <member name="M:Microsoft.Z3.Sort.Equals(System.Object)">
-            <summary>
-            Equality operator for objects of type Sort.
-            </summary>
-            <param name="o"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Microsoft.Z3.Sort.GetHashCode">
-            <summary>
-            Hash code generation for Sorts
-            </summary>
-            <returns>A hash code</returns>
-        </member>
-        <member name="M:Microsoft.Z3.Sort.ToString">
-            <summary>
-            A string representation of the sort.
+            Real expressions
             </summary>
         </member>
-        <member name="M:Microsoft.Z3.Sort.#ctor(Microsoft.Z3.Context)">
+        <member name="M:Microsoft.Z3.RealExpr.#ctor(Microsoft.Z3.Context)">
+            <summary> Constructor for RealExpr </summary>
+        </member>
+        <member name="M:Microsoft.Z3.RatNum.ToDecimalString(System.UInt32)">
             <summary>
-            Sort constructor
+            Returns a string representation in decimal notation.
+            </summary>
+            <remarks>The result has at most <paramref name="precision"/> decimal places.</remarks>    
+        </member>
+        <member name="M:Microsoft.Z3.RatNum.ToString">
+            <summary>
+            Returns a string representation of the numeral.
+            </summary>        
+        </member>
+        <member name="P:Microsoft.Z3.RatNum.Numerator">
+            <summary>
+            The numerator of a rational numeral.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.Sort.Id">
+        <member name="P:Microsoft.Z3.RatNum.Denominator">
             <summary>
-            Returns a unique identifier for the sort.
+            The denominator of a rational numeral.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.Sort.SortKind">
+        <member name="P:Microsoft.Z3.RatNum.BigIntNumerator">
             <summary>
-            The kind of the sort.
+            Converts the numerator of the rational to a BigInteger
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.Sort.Name">
+        <member name="P:Microsoft.Z3.RatNum.BigIntDenominator">
             <summary>
-            The name of the sort
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.BoolSort">
-            <summary>
-            A Boolean sort.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.ArithSort">
-            <summary>
-            An arithmetic sort, i.e., Int or Real.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.IntSort">
-            <summary>
-             An Integer sort
+            Converts the denominator of the rational to a BigInteger
             </summary>
         </member>
         <member name="T:Microsoft.Z3.RealSort">
@@ -4341,60 +4566,307 @@
             A real sort
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.BitVecSort">
+        <member name="T:Microsoft.Z3.RelationSort">
             <summary>
-            Bit-vector sorts.
+            Relation sorts.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.BitVecSort.Size">
+        <member name="P:Microsoft.Z3.RelationSort.Arity">
             <summary>
-            The size of the bit-vector sort.
+            The arity of the relation sort.
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.ArraySort">
+        <member name="P:Microsoft.Z3.RelationSort.ColumnSorts">
             <summary>
-            Array sorts.
+            The sorts of the columns of the relation sort.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.ArraySort.Domain">
+        <member name="T:Microsoft.Z3.SetSort">
             <summary>
-            The domain of the array sort.
+            Set sorts.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.ArraySort.Range">
+        <member name="T:Microsoft.Z3.Solver">
             <summary>
-            The range of the array sort.
+            Solvers.
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.DatatypeSort">
+        <member name="M:Microsoft.Z3.Solver.Push">
             <summary>
-            Datatype sorts.
+            Creates a backtracking point.
+            </summary>
+            <seealso cref="M:Microsoft.Z3.Solver.Pop(System.UInt32)"/>
+        </member>
+        <member name="M:Microsoft.Z3.Solver.Pop(System.UInt32)">
+            <summary>
+            Backtracks <paramref name="n"/> backtracking points.
+            </summary>
+            <remarks>Note that an exception is thrown if <paramref name="n"/> is not smaller than <c>NumScopes</c></remarks>
+            <seealso cref="M:Microsoft.Z3.Solver.Push"/>
+        </member>
+        <member name="M:Microsoft.Z3.Solver.Reset">
+            <summary>
+            Resets the Solver.
+            </summary>
+            <remarks>This removes all assertions from the solver.</remarks>
+        </member>
+        <member name="M:Microsoft.Z3.Solver.Assert(Microsoft.Z3.BoolExpr[])">
+            <summary>
+            Assert a constraint (or multiple) into the solver.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Solver.Add(Microsoft.Z3.BoolExpr[])">
+            <summary>
+            Alias for Assert.
+            </summary>        
+        </member>
+        <member name="M:Microsoft.Z3.Solver.AssertAndTrack(Microsoft.Z3.BoolExpr[],Microsoft.Z3.BoolExpr[])">
+            <summary>
+            Assert multiple constraints into the solver, and track them (in the unsat) core 
+            using the Boolean constants in ps. 
+            </summary>
+            <remarks>
+            This API is an alternative to <see cref="M:Microsoft.Z3.Solver.Check(Microsoft.Z3.Expr[])"/> with assumptions for extracting unsat cores.
+            Both APIs can be used in the same solver. The unsat core will contain a combination
+            of the Boolean variables provided using <see cref="M:Microsoft.Z3.Solver.AssertAndTrack(Microsoft.Z3.BoolExpr[],Microsoft.Z3.BoolExpr[])"/> 
+            and the Boolean literals
+            provided using <see cref="M:Microsoft.Z3.Solver.Check(Microsoft.Z3.Expr[])"/> with assumptions.
+            </remarks>        
+        </member>
+        <member name="M:Microsoft.Z3.Solver.AssertAndTrack(Microsoft.Z3.BoolExpr,Microsoft.Z3.BoolExpr)">
+            <summary>
+            Assert a constraint into the solver, and track it (in the unsat) core 
+            using the Boolean constant p. 
+            </summary>
+            <remarks>
+            This API is an alternative to <see cref="M:Microsoft.Z3.Solver.Check(Microsoft.Z3.Expr[])"/> with assumptions for extracting unsat cores.
+            Both APIs can be used in the same solver. The unsat core will contain a combination
+            of the Boolean variables provided using <see cref="M:Microsoft.Z3.Solver.AssertAndTrack(Microsoft.Z3.BoolExpr[],Microsoft.Z3.BoolExpr[])"/> 
+            and the Boolean literals
+            provided using <see cref="M:Microsoft.Z3.Solver.Check(Microsoft.Z3.Expr[])"/> with assumptions.
+            </remarks>        
+        </member>
+        <member name="M:Microsoft.Z3.Solver.Check(Microsoft.Z3.Expr[])">
+            <summary>
+            Checks whether the assertions in the solver are consistent or not.
+            </summary>
+            <remarks>
+            <seealso cref="P:Microsoft.Z3.Solver.Model"/>
+            <seealso cref="P:Microsoft.Z3.Solver.UnsatCore"/>
+            <seealso cref="P:Microsoft.Z3.Solver.Proof"/>    
+            </remarks>    
+        </member>
+        <member name="M:Microsoft.Z3.Solver.ToString">
+            <summary>
+            A string representation of the solver.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.DatatypeSort.NumConstructors">
+        <member name="P:Microsoft.Z3.Solver.Help">
             <summary>
-            The number of constructors of the datatype sort.
+            A string that describes all available solver parameters.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.DatatypeSort.Constructors">
+        <member name="P:Microsoft.Z3.Solver.Parameters">
             <summary>
-            The constructors.
+            Sets the solver parameters.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.DatatypeSort.Recognizers">
+        <member name="P:Microsoft.Z3.Solver.ParameterDescriptions">
             <summary>
-            The recognizers.
+            Retrieves parameter descriptions for solver.
             </summary>
         </member>
-        <member name="P:Microsoft.Z3.DatatypeSort.Accessors">
+        <member name="P:Microsoft.Z3.Solver.NumScopes">
             <summary>
-            The constructor accessors.
+            The current number of backtracking points (scopes).
+            </summary>
+            <seealso cref="M:Microsoft.Z3.Solver.Pop(System.UInt32)"/>
+            <seealso cref="M:Microsoft.Z3.Solver.Push"/>
+        </member>
+        <member name="P:Microsoft.Z3.Solver.NumAssertions">
+            <summary>
+            The number of assertions in the solver.
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.UninterpretedSort">
+        <member name="P:Microsoft.Z3.Solver.Assertions">
             <summary>
-            Uninterpreted Sorts
+            The set of asserted formulas.
             </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Solver.Model">
+            <summary>
+            The model of the last <c>Check</c>.
+            </summary>
+            <remarks>
+            The result is <c>null</c> if <c>Check</c> was not invoked before,
+            if its results was not <c>SATISFIABLE</c>, or if model production is not enabled.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Z3.Solver.Proof">
+            <summary>
+            The proof of the last <c>Check</c>.
+            </summary>
+            <remarks>    
+            The result is <c>null</c> if <c>Check</c> was not invoked before,
+            if its results was not <c>UNSATISFIABLE</c>, or if proof production is disabled.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Z3.Solver.UnsatCore">
+            <summary>
+            The unsat core of the last <c>Check</c>.
+            </summary>
+            <remarks>
+            The unsat core is a subset of <c>Assertions</c>
+            The result is empty if <c>Check</c> was not invoked before,
+            if its results was not <c>UNSATISFIABLE</c>, or if core production is disabled.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Z3.Solver.ReasonUnknown">
+            <summary>
+            A brief justification of why the last call to <c>Check</c> returned <c>UNKNOWN</c>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Solver.Statistics">
+            <summary>
+            Solver statistics.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Statistics">
+            <summary>
+            Objects of this class track statistical information about solvers. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Statistics.ToString">
+            <summary>
+            A string representation of the statistical data.
+            </summary>    
+        </member>
+        <member name="P:Microsoft.Z3.Statistics.Size">
+            <summary>
+            The number of statistical data.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Statistics.Entries">
+            <summary>
+            The data entries.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Statistics.Keys">
+            <summary>
+            The statistical counters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Statistics.Item(System.String)">
+            <summary>
+            The value of a particular statistical counter.
+            </summary>        
+            <remarks>Returns null if the key is unknown.</remarks>
+        </member>
+        <member name="T:Microsoft.Z3.Statistics.Entry">
+            <summary>
+            Statistical data is organized into pairs of [Key, Entry], where every
+            Entry is either a <c>DoubleEntry</c> or a <c>UIntEntry</c>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Z3.Statistics.Entry.Key">
+            <summary>
+            The key of the entry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Statistics.Entry.ToString">
+            <summary>
+            The string representation of the Entry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Statistics.Entry.UIntValue">
+            <summary>
+            The uint-value of the entry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Statistics.Entry.DoubleValue">
+            <summary>
+            The double-value of the entry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Statistics.Entry.IsUInt">
+            <summary>
+            True if the entry is uint-valued.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Statistics.Entry.IsDouble">
+            <summary>
+            True if the entry is double-valued.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Statistics.Entry.Value">
+            <summary>
+            The string representation of the the entry's value.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.Status">
+            <summary>
+            Status values.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Z3.Status.UNSATISFIABLE">
+            <summary>
+            Used to signify an unsatisfiable status.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Z3.Status.UNKNOWN">
+            <summary>
+            Used to signify an unknown status.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Z3.Status.SATISFIABLE">
+            <summary>
+            Used to signify a satisfiable status.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Z3.StringSymbol">
+            <summary>
+            Named symbols
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.StringSymbol.String">
+            <summary>
+            The string value of the symbol.
+            </summary>
+            <remarks>Throws an exception if the symbol is not of string kind.</remarks>
+        </member>
+        <member name="T:Microsoft.Z3.Tactic">
+            <summary>
+            Tactics are the basic building block for creating custom solvers for specific problem domains.
+            The complete list of tactics may be obtained using <c>Context.NumTactics</c> 
+            and <c>Context.TacticNames</c>.
+            It may also be obtained using the command <c>(help-tactics)</c> in the SMT 2.0 front-end.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Z3.Tactic.Apply(Microsoft.Z3.Goal,Microsoft.Z3.Params)">
+            <summary>
+            Execute the tactic over the goal. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Tactic.Help">
+            <summary>
+            A string containing a description of parameters accepted by the tactic.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Tactic.ParameterDescriptions">
+            <summary>
+            Retrieves parameter descriptions for Tactics.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Tactic.Item(Microsoft.Z3.Goal)">
+            <summary>
+            Apply the tactic to a goal.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Z3.Tactic.Solver">
+            <summary>
+            Creates a solver that is implemented using the given tactic.
+            </summary>
+            <seealso cref="M:Microsoft.Z3.Context.MkSolver(Microsoft.Z3.Tactic)"/>
         </member>
         <member name="T:Microsoft.Z3.TupleSort">
             <summary>
@@ -4416,148 +4888,10 @@
             The field declarations.
             </summary>
         </member>
-        <member name="T:Microsoft.Z3.EnumSort">
+        <member name="T:Microsoft.Z3.UninterpretedSort">
             <summary>
-            Enumeration sorts.
+            Uninterpreted Sorts
             </summary>
-        </member>
-        <member name="P:Microsoft.Z3.EnumSort.ConstDecls">
-            <summary>
-            The function declarations of the constants in the enumeration.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.EnumSort.Consts">
-            <summary>
-            The constants in the enumeration.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.EnumSort.TesterDecls">
-            <summary>
-            The test predicates for the constants in the enumeration.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.ListSort">
-            <summary>
-            List sorts.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ListSort.NilDecl">
-            <summary>
-            The declaration of the nil function of this list sort.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ListSort.Nil">
-            <summary>
-            The empty list.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ListSort.IsNilDecl">
-            <summary>
-            The declaration of the isNil function of this list sort.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ListSort.ConsDecl">
-            <summary>
-            The declaration of the cons function of this list sort.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ListSort.IsConsDecl">
-            <summary>
-            The declaration of the isCons function of this list sort.
-            </summary>
-            
-        </member>
-        <member name="P:Microsoft.Z3.ListSort.HeadDecl">
-            <summary>
-            The declaration of the head function of this list sort.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.ListSort.TailDecl">
-            <summary>
-            The declaration of the tail function of this list sort.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.RelationSort">
-            <summary>
-            Relation sorts.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.RelationSort.Arity">
-            <summary>
-            The arity of the relation sort.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.RelationSort.ColumnSorts">
-            <summary>
-            The sorts of the columns of the relation sort.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.FiniteDomainSort">
-            <summary>
-            Finite domain sorts.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.FiniteDomainSort.Size">
-            <summary>
-            The size of the finite domain sort.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.SetSort">
-            <summary>
-            Set sorts.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.Symbol">
-            <summary>
-            Symbols are used to name several term and type constructors.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Symbol.IsIntSymbol">
-            <summary>
-            Indicates whether the symbol is of Int kind
-            </summary>    
-        </member>
-        <member name="M:Microsoft.Z3.Symbol.IsStringSymbol">
-            <summary>
-            Indicates whether the symbol is of string kind.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Symbol.ToString">
-            <summary>
-            A string representation of the symbol.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Z3.Symbol.#ctor(Microsoft.Z3.Context,System.IntPtr)">
-            <summary>
-            Symbol constructor
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.Symbol.Kind">
-            <summary>
-            The kind of the symbol (int or string)
-            </summary>
-        </member>
-        <member name="T:Microsoft.Z3.IntSymbol">
-            <summary>
-            Numbered symbols
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.IntSymbol.Int">
-            <summary>
-            The int value of the symbol.
-            </summary>
-            <remarks>Throws an exception if the symbol is not of int kind. </remarks>
-        </member>
-        <member name="T:Microsoft.Z3.StringSymbol">
-            <summary>
-            Named symbols
-            </summary>
-        </member>
-        <member name="P:Microsoft.Z3.StringSymbol.String">
-            <summary>
-            The string value of the symbol.
-            </summary>
-            <remarks>Throws an exception if the symbol is not of string kind.</remarks>
         </member>
         <member name="T:Microsoft.Z3.Version">
             <summary>

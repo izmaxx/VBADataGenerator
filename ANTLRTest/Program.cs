@@ -14,38 +14,29 @@ namespace ANTLRTest
     {
         static void Main(string[] args)
         {
+            // Generate Parse Tree from file
             FileStream fileStream = new FileStream(@"c:\example2.txt", FileMode.Open, FileAccess.Read);
-
-            Stream inputStream = Console.OpenStandardInput();
             AntlrInputStream input = new AntlrInputStream(fileStream);
             VBGrammarLexer lexer = new VBGrammarLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             VBGrammarParser parser = new VBGrammarParser(tokens);
-
-            IParseTree tree = parser.startRule(); // begin parsing at init rule
-            
+            IParseTree tree = parser.startRule();
             Console.WriteLine(tree.ToStringTree(parser));
 
-            ParameterExpression p1 = Expression.Parameter(typeof(int), "p1");
-            ParameterExpression p2 = Expression.Parameter(typeof(int), "p2");
-            ConstantExpression c1 = Expression.Constant(3);
-            BinaryExpression b1 = Expression.LessThan(p1, c1);
-            BinaryExpression b2 = Expression.GreaterThan(p2, c1);
-            BinaryExpression b3 = Expression.LessThanOrEqual(p2, c1);
-            BinaryExpression final = Expression.And(Expression.Or(b1, b2), b3);
-
-
-
-            System.Console.WriteLine(final);
-
+            // Use visitor pattern to get "raw" constraints
             VbaTreeVisitor eval = new VbaTreeVisitor();
             Expression exp = eval.Visit(tree);
-            var test = eval.rawConstraints;
+            List<RawConstraint> rawConstraints = eval.rawConstraints;
 
+            // Update constraints to transform into binary tree and get leaf nodes
+            RawConstraint.updateParents(rawConstraints);
+            List<RawConstraint> leafNodes = RawConstraint.getLeafNodes(rawConstraints);
 
-            //parser.addSubExpr();
-
+            // For each leaf node, work the way up to generate PathConstraints
+            // TODO
 
         }
+
+
     }
 }

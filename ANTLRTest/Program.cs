@@ -14,7 +14,7 @@ namespace ANTLRTest
     {
         static void Main(string[] args)
         {
-            FileStream fileStream = new FileStream(@"c:\example1.txt", FileMode.Open, FileAccess.Read);
+            FileStream fileStream = new FileStream(@"c:\example2.txt", FileMode.Open, FileAccess.Read);
 
             Stream inputStream = Console.OpenStandardInput();
             AntlrInputStream input = new AntlrInputStream(fileStream);

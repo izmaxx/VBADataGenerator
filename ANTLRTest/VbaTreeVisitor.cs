@@ -26,6 +26,7 @@ namespace ANTLRTest
             findParent(context, rc);
             rawConstraints.Add(rc);
 
+
             return base.VisitBlockIfThenElse(context);
         }
 
@@ -44,7 +45,6 @@ namespace ANTLRTest
 
         private static Expression getExpression(VBGrammarParser.IfConditionStmtContext context)
         {
-            Expression expr = null;
             String varname = null;
             String op = null;
             String value = null;
@@ -85,6 +85,7 @@ namespace ANTLRTest
             ParameterExpression varExpr = ParameterExpression.Parameter(typeof(int), varname);
             ParameterExpression literalExpr = ParameterExpression.Parameter(typeof(int), value);
 
+            // TODO - add cases for more operations
             switch (op)
             {
                 case "=":
@@ -104,7 +105,7 @@ namespace ANTLRTest
             
             while (parent != null)
             {
-                String parentType = parent.Parent.GetType().ToString();
+                String parentType = parent.GetType().ToString();
                 if (parentType == "VBGrammarParser+SubStmtContext")
                 {
                     Console.WriteLine("Sub statement found before any branches, set parent null");
@@ -132,21 +133,17 @@ namespace ANTLRTest
             }
         }
 
-        public override Expression VisitLiteral([NotNull] VBGrammarParser.LiteralContext context)
+        public override Expression VisitIfElseBlockStmt([NotNull] VBGrammarParser.IfElseBlockStmtContext context)
         {
-            var line = context.Start.Line;
-            var value = context.GetText();
-            var intContext = context.INTEGERLITERAL();
-            var strContext = context.STRINGLITERAL();
+            RawConstraint rc = new RawConstraint();
+            rc.LineNumber = context.Start.StartIndex;
+            rc.ExprType = "IE";
+            rc.BranchType = "FALSE";
+            findParent(context, rc);
+            rc.Expr = null;
+            rawConstraints.Add(rc);
 
-            if (intContext != null)
-            {
-                ConstantExpression intConst = Expression.Constant(Convert.ToInt32(intContext.GetText()), typeof(int));
-                return intConst;
-            }
-
-            System.Console.WriteLine("Value visitor: " + value );
-            return null;
+            return base.VisitIfElseBlockStmt(context);
         }
 
 

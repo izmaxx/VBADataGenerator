@@ -14,6 +14,15 @@ namespace ANTLRTest
         public Expression Expr { get; set; }
         public string ExprType { get; set; }
         public string BranchType { get; set; }
-       
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("ExprType: " + ExprType);
+            sb.Append(", Parent: " + ParentLineNumber.ToString());
+            sb.Append(", Line: " + LineNumber.ToString());
+            sb.Append("\n");
+            return sb.ToString();
+        }
     }
 }

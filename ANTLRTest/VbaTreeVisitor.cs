@@ -12,90 +12,124 @@ namespace ANTLRTest
 {
     class VbaTreeVisitor : VBGrammarBaseVisitor<Expression>
     {
-        List<ConditionNode> conditions = new List<ConditionNode>();
+        public List<RawConstraint> rawConstraints = new List<RawConstraint>();
+        
 
-        public override Expression VisitBlock([NotNull] VBGrammarParser.BlockContext context)
+        public override Expression VisitBlockIfThenElse([NotNull] VBGrammarParser.BlockIfThenElseContext context)
         {
-            int lineNumber = context.Start.Line;
+            RawConstraint rc = new RawConstraint();
+            rc.LineNumber = context.SourceInterval.a;
+            rc.ExprType = "ITE";
+            rc.Expr = null;
+            rc.BranchType = null;
+            // Get parent IfThenElse.  If not found before subStmt, then set to null
+            findParent(context, rc);
+            rawConstraints.Add(rc);
 
-            var source = context.Parent.SourceInterval;
-
-            return base.VisitBlock(context);
+            return base.VisitBlockIfThenElse(context);
         }
 
         public override Expression VisitIfConditionStmt([NotNull] VBGrammarParser.IfConditionStmtContext context)
         {
-            //Expression left = null;
-            //String op = "";
-            //Expression right = null;
+            RawConstraint rc = new RawConstraint();
+            rc.LineNumber = context.Start.StartIndex;
+            rc.ExprType = "IB";
+            rc.BranchType = "TRUE";
+            findParent(context, rc);
+            rc.Expr = getExpression(context);
+            rawConstraints.Add(rc);
+
+            return base.VisitIfConditionStmt(context);
+        }
+
+        private static Expression getExpression(VBGrammarParser.IfConditionStmtContext context)
+        {
+            Expression expr = null;
+            String varname = null;
+            String op = null;
+            String value = null;
+
             var valueStatement = context.valueStmt();
-            var currentLineNumber = valueStatement.Start.Line;
-
-            var parent = context.Parent;
-            var source = context.Parent.SourceInterval;
-            while (parent != null)
-            {
-                String parentType = parent.Parent.GetType().ToString();
-                if (parentType == "VBGrammarParser+BlockContext")
-                {
-                    var test = parent.SourceInterval;
-                    
-                    //Token firstToken = tokenStream.get(test.a);
-                    //Token firstToken = tokenStream.get(sourceInterval.a);
-                    //int line = firstToken.getLine();
-                    Console.WriteLine("Found block");
-                    break;
-                } else
-                {
-                    parent = parent.Parent;
-                    Console.WriteLine("Parent type: " + parentType);
-                }
-            }
-
-           // var parentType = parent.GetType();
-
             var count = valueStatement.ChildCount;
 
+            // TODO - currently assume format of variable, operator, literal
             for (int i = 0; i < count; i++)
             {
                 var child = valueStatement.GetChild(i);
+                var type = child.GetType().ToString();
                 Console.WriteLine(child.GetType());
-                Console.WriteLine(child.GetText());
+
+                if (child.GetText() == " ")
+                {
+                    continue;
+                } else if (type == "VBGrammarParser+VsICSContext")
+                {
+                    varname = child.GetText();
+                } else
+                {
+                    if (child.GetText() == "=")
+                    {
+                        op = "=";
+                    } else if (child.GetText() == ">")
+                    {
+                        op = ">";
+                    } else
+                    {
+                        value = child.GetText();
+                    }
+                    Console.WriteLine(child.GetText());
+                }
+
             }
 
-            //for (int i = 0; i < count; i++)
-            //{
+            ParameterExpression varExpr = ParameterExpression.Parameter(typeof(int), varname);
+            ParameterExpression literalExpr = ParameterExpression.Parameter(typeof(int), value);
 
-            //    var child = a.GetChild(i);
-            //    var childText = child.GetText();
+            switch (op)
+            {
+                case "=":
+                    BinaryExpression eq = BinaryExpression.Equal(varExpr, literalExpr);
+                    return eq;
+                case ">":
+                    BinaryExpression gt = BinaryExpression.GreaterThan(varExpr, literalExpr);
+                    return gt;
+            }
 
-            //    if (child.GetType().ToString() == "VBGrammarParser+VsICSContext")
-            //    {
-            //        System.Console.WriteLine("Found VsICSContext");
-            //        ParameterExpression param = Expression.Parameter(typeof(int), child.GetText());
-            //        left = param;
-            //    }
+            return null;
+        }
 
-            //    if (child.GetText() == "=")
-            //    {
-            //        System.Console.WriteLine("Equal found");
-            //        op = "=";
-            //    }
-
-            //    Console.WriteLine(child.GetType());
-            //    if (child.GetType().ToString() == "VBGrammarParser+VsLiteralContext")
-            //    {
-            //        right = Visit(child);
-            //    }
-            //}
-
-            //if (op == "=") {
-            //    BinaryExpression b1 = BinaryExpression.Equal(left, right); 
-            //}
-
+        private void findParent(RuleContext context, RawConstraint rc)
+        {
+            var parent = context.Parent;
+            
+            while (parent != null)
+            {
+                String parentType = parent.Parent.GetType().ToString();
+                if (parentType == "VBGrammarParser+SubStmtContext")
+                {
+                    Console.WriteLine("Sub statement found before any branches, set parent null");
+                    RuleContext token = (RuleContext)parent.Payload;
+                    ParserRuleContext token1 = (ParserRuleContext)parent.Payload;
+                    var test = token1.Start;
+                    rc.ParentLineNumber = parent.SourceInterval.a;
+                    
+                    //var test = parent.SourceInterval;
+                    //Token firstToken = tokenStream.get(test.a);
+                    //Token firstToken = tokenStream.get(sourceInterval.a);
+                    //int line = firstToken.getLine();
 
 
-            return VisitChildren(context);
+                    break;
+                }
+                else if (parentType == "VBGrammarParser+BlockIfThenElseContext")
+                {
+                    rc.ParentLineNumber = parent.SourceInterval.a;
+                    break;
+                }
+
+                parent = parent.Parent;
+                Console.WriteLine("Parent type: " + parentType);
+            }
         }
 
         public override Expression VisitLiteral([NotNull] VBGrammarParser.LiteralContext context)

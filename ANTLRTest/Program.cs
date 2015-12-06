@@ -18,7 +18,6 @@ namespace ANTLRTest
 
             Stream inputStream = Console.OpenStandardInput();
             AntlrInputStream input = new AntlrInputStream(fileStream);
-            //AntlrInputStream input = new AntlrInputStream("{1,2}");
             VBGrammarLexer lexer = new VBGrammarLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             VBGrammarParser parser = new VBGrammarParser(tokens);
@@ -41,6 +40,7 @@ namespace ANTLRTest
 
             VbaTreeVisitor eval = new VbaTreeVisitor();
             Expression exp = eval.Visit(tree);
+            var test = eval.rawConstraints;
 
 
             //parser.addSubExpr();

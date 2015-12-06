@@ -55,6 +55,7 @@
     <Compile Include="ISolver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawConstraint.cs" />
     <Compile Include="VbaTreeVisitor.cs" />
     <Compile Include="VBGrammarBaseListener.cs" />
     <Compile Include="VBGrammarBaseVisitor.cs" />

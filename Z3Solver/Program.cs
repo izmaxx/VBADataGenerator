@@ -355,7 +355,7 @@ namespace Z3Solver
                             Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
                             Console.WriteLine("right value2: " + rightValue2);
-                            resultQ = LtLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            resultQ = LtLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ; 
                         }
                         else if (rightEquation.Contains(">="))
@@ -384,7 +384,7 @@ namespace Z3Solver
             }
         }
 
-        public static Expr LtLt(String left1, int left2, String right1, int right2)
+        public static Expr LtLe(String left1, int left2, String right1, int right2)
         {
             using (Context ctx = new Context())
             {

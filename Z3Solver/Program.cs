@@ -32,8 +32,8 @@ namespace Z3Solver
                 BinaryExpression b2 = Expression.GreaterThan(p2, three);
                 BinaryExpression final = Expression.Or(b1, b2);
 
-                Z3Solver solver = new Z3Solver();
-                var result = solver.calculateTestData(final);
+                //Z3Solver solver = new Z3Solver();
+                //var result = solver.calculateTestData(final);
 
 
                 //IntExpr x = ctx.MkIntConst("a");
@@ -42,7 +42,7 @@ namespace Z3Solver
                 //Model model = Check(ctx, test, Status.SATISFIABLE);
             }
         }
-
+        
         static Model Check(Context ctx, BoolExpr f, Status sat)
         {
             Solver s = ctx.MkSolver();
@@ -53,7 +53,8 @@ namespace Z3Solver
             };
             if (sat == Status.SATISFIABLE)
             {
-                //Console.WriteLine("Data:" + s.Model);
+                Console.WriteLine("Data:" + s.Model);
+                Console.WriteLine("Satisfiable"); 
                 return s.Model;
             }
             else
@@ -198,12 +199,10 @@ namespace Z3Solver
                 Expr three = ctx.MkNumeral(3, ctx.MkIntSort());
                 Expr p2 = ctx.MkConst("p2", ctx.MkIntSort());
                 Expr two = ctx.MkNumeral(2, ctx.MkIntSort());
-             
-
+            
                 Solver s = ctx.MkSolver();
-
+               
                 //s.Assert(ctx.MkAnd(ctx.MkOr(ctx.MkLt((ArithExpr)p1, (ArithExpr)three), ctx.MkGt((ArithExpr)p2, (ArithExpr)three)), ctx.MkLe((ArithExpr)p2, (ArithExpr)three)));
-
                 s.Assert(ctx.MkOr(ctx.MkLt((ArithExpr)p1, (ArithExpr)three), ctx.MkGt((ArithExpr)p2, (ArithExpr)three)), ctx.MkLe((ArithExpr)p2, (ArithExpr)three));
 
                 s.Check();
@@ -280,9 +279,6 @@ namespace Z3Solver
                     //separate the before and after.
                     Console.WriteLine("or");
                 }
-
-
-
                 String after = iS.Substring(index + 3, stringlength - index - 2 - 1);
                 Console.WriteLine("after: " + after);
             }
@@ -293,14 +289,131 @@ namespace Z3Solver
             if (iS.Contains(")>("))
             {
             }
-
-
-
-
             Console.WriteLine("Z3: " + sample);
-
         }
 
+        public static Expr parseAll2(String equation)
+        {
+            using (Context ctx = new Context())
+            {
+                String formula = equation;
 
+                formula = formula.Replace(" ", "");
+                formula = formula.ToLower();
+                int formulaLength = formula.Length;
+                int index;
+                String leftEquation;
+                int leftSymbolIndex;
+                String leftValue1;
+                String leftValue2;
+
+
+                String rightEquation;
+                int rightSymbolIndex;
+                String rightValue1;
+                String rightValue2;
+                Expr resultQ;
+
+                Console.WriteLine(formula);
+
+                if (formula.Contains(")and("))
+                {
+                    Console.WriteLine("And");
+                    //Get the values of the left equation  
+                    index = formula.IndexOf(")and(");
+                    leftEquation = formula.Substring(0, index + 1);
+                    Console.WriteLine("left: " + leftEquation);
+                    //Get the value of the right equation
+                    rightEquation = formula.Substring(index + 4, formulaLength - (index + 4));
+                    Console.WriteLine("right: " + rightEquation);
+                    //Check the sign of the left equation
+                    if (leftEquation.Contains("<="))
+                    {
+
+
+                    }
+                    else if (leftEquation.Contains(">="))
+                    {
+                        Console.WriteLine(">=");
+                    }
+                    else if (leftEquation.Contains("<"))
+                    {
+                        //Get the values for the left Equation. 
+                        Console.WriteLine("left <");
+                        leftSymbolIndex = leftEquation.IndexOf("<");
+                        leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
+                        Console.WriteLine("left value1: " + leftValue1);
+                        leftValue2 = leftEquation.Substring(leftSymbolIndex + 1, leftEquation.Length - leftSymbolIndex - 2);
+                        Console.WriteLine("left value2: " + leftValue2);
+
+                        //Get the values for the right Equation
+                        if (rightEquation.Contains("<="))
+                        {
+                            Console.WriteLine("right<=");
+                            rightSymbolIndex = rightEquation.IndexOf("<=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = LtLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ; 
+                        }
+                        else if (rightEquation.Contains(">="))
+                        {
+                            Console.WriteLine("right>=");
+                        }
+                        else if (rightEquation.Contains("<"))
+                        {
+                            Console.WriteLine("right<");
+                        }
+                        else
+                        {
+                            Console.WriteLine("right >");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine(">");
+                    }
+                }
+                if (formula.Contains(")or("))
+                {
+                    Console.WriteLine("Or");
+                }
+                return null; 
+            }
+        }
+
+        public static Expr LtLt(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
+               
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+
+                Expr result2;
+                Model m2 = s.Model; 
+                foreach(FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2; 
+                }
+
+            }
+            return null; 
+        }
     }
 }

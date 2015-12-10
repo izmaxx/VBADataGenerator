@@ -8,3 +8,14 @@ C:\ExcelVBAGit\VBADataGenerator\Z3Solver\bin\Debug\Microsoft.Z3.dll
 C:\ExcelVBAGit\VBADataGenerator\Z3Solver\bin\Debug\ANTLRTest.pdb
 C:\ExcelVBAGit\VBADataGenerator\Z3Solver\bin\Debug\Microsoft.Z3.xml
 C:\ExcelVBAGit\VBADataGenerator\Z3Solver\obj\Debug\Z3Solver.csprojResolveAssemblyReference.cache
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\obj\Debug\Z3Solver.csprojResolveAssemblyReference.cache
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\bin\Debug\Z3Solver.exe.config
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\bin\Debug\Z3Solver.exe
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\bin\Debug\Z3Solver.pdb
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\bin\Debug\ANTLRTest.exe
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\bin\Debug\Microsoft.Z3.dll
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\bin\Debug\Antlr4.Runtime.dll
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\bin\Debug\ANTLRTest.pdb
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\bin\Debug\Microsoft.Z3.xml
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\obj\Debug\Z3Solver.exe
+C:\Users\Kim\Documents\GitHub\VBADataGenerator\Z3Solver\obj\Debug\Z3Solver.pdb

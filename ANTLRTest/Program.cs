@@ -28,6 +28,9 @@ namespace ANTLRTest
             Expression exp = eval.Visit(tree);
             List<RawConstraint> rawConstraints = eval.rawConstraints;
 
+            // Create negated expressions for ELSE blocks
+            RawConstraint.updateElseBlocks(rawConstraints);
+
             // Update constraints to transform into binary tree and get leaf nodes
             RawConstraint.updateParents(rawConstraints);
             List<RawConstraint> leafNodes = RawConstraint.getLeafNodes(rawConstraints);

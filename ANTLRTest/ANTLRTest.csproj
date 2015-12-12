@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConditionNode.cs" />
+    <Compile Include="ConstraintExtractor.cs" />
     <Compile Include="ISolver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

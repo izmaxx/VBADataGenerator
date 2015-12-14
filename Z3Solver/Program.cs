@@ -13,11 +13,10 @@ namespace Z3Solver
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
             using (Context ctx = new Context())
             {
                 // Simplified case: (p1 < 3) or (p2 > 3)
-                ParameterExpression p1 = Expression.Parameter(typeof(int), "p1");
+            /*    ParameterExpression p1 = Expression.Parameter(typeof(int), "p1");
                 ParameterExpression p2 = Expression.Parameter(typeof(int), "p2");
                 ConstantExpression three = Expression.Constant(3);
                 BinaryExpression b1 = Expression.LessThan(p1, three);
@@ -25,14 +24,14 @@ namespace Z3Solver
                 BinaryExpression final = Expression.Or(b1, b2);
 
                 Z3Solver solver = new Z3Solver();
-                var result = solver.calculateTestData(final);
+                var result = solver.calculateTestData(final);*/
 
                 //IntExpr x = ctx.MkIntConst("a");
                 //IntExpr one = ctx.MkInt(3);
                 //BoolExpr test = ctx.MkLt(x, one); // x< 3
                 //Model model = Check(ctx, test, Status.SATISFIABLE);
             }
-=======
+
             // Generate Parse Tree from file
             var constraints = ConstraintExtractor.getConstraints();
             foreach (Expression c in constraints)
@@ -42,10 +41,6 @@ namespace Z3Solver
                 Expr testData = parseAll2(equation);
                 Console.WriteLine(c.ToString());
             }
-
-
-
->>>>>>> origin/master
         }
         
         static Model Check(Context ctx, BoolExpr f, Status sat)
@@ -75,8 +70,8 @@ namespace Z3Solver
 
                 formula = formula.Replace(" ", "");
                 formula = formula.ToLower();
-                formula = formula.Remove(0, 2);               
-                formula = formula.Remove(formula.Length - 2, 2);
+                formula = formula.Remove(0, 1);               
+                formula = formula.Remove(formula.Length - 2, 1);
                 Console.WriteLine("equation: " + formula);
                 int formulaLength = formula.Length;
                 int index;

@@ -1,4 +1,5 @@
-﻿using Microsoft.Z3;
+﻿using ANTLRTest;
+using Microsoft.Z3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Z3Solver
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             using (Context ctx = new Context())
             {
                 // Simplified case: (p1 < 3) or (p2 > 3)
@@ -30,6 +32,20 @@ namespace Z3Solver
                 //BoolExpr test = ctx.MkLt(x, one); // x< 3
                 //Model model = Check(ctx, test, Status.SATISFIABLE);
             }
+=======
+            // Generate Parse Tree from file
+            var constraints = ConstraintExtractor.getConstraints();
+            foreach (Expression c in constraints)
+            {
+                // Call the solver to produce data for each constraint set in list
+                String equation = c.ToString();
+                Expr testData = parseAll2(equation);
+                Console.WriteLine(c.ToString());
+            }
+
+
+
+>>>>>>> origin/master
         }
         
         static Model Check(Context ctx, BoolExpr f, Status sat)

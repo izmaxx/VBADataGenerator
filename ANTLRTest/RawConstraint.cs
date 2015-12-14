@@ -59,6 +59,59 @@ namespace ANTLRTest
             return rawConstraints;
         }
 
+        public static List<RawConstraint> updateElseBlocks(List<RawConstraint> rawConstraints)
+        {
+            var elses = from rc in rawConstraints
+                        where rc.ExprType == "IE"
+                        select rc;
+
+            foreach (RawConstraint el in elses)
+            {
+                var parentLine = el.ParentLineNumber;
+                var ifb = from rc in rawConstraints
+                          where rc.ParentLineNumber == parentLine && rc.ExprType == "IB"
+                          select rc;
+                var expr = ifb.Single<RawConstraint>().Expr;
+
+                var binexp = (BinaryExpression)expr;
+                var left = binexp.Left;
+                var right = binexp.Right;
+                var op = binexp.NodeType;
+
+                // TODO - use visitor pattern for conversion to handle more complex types
+                switch (op)
+                {
+                    case ExpressionType.Equal:
+                        BinaryExpression notEqExp = BinaryExpression.NotEqual(left, right);
+                        el.Expr = notEqExp;
+                        break;
+                    case ExpressionType.LessThan:
+                        BinaryExpression gteExp = BinaryExpression.GreaterThanOrEqual(left, right);
+                        el.Expr = gteExp;
+                        break;
+                    case ExpressionType.GreaterThan:
+                        BinaryExpression lteExp = BinaryExpression.LessThanOrEqual(left, right);
+                        el.Expr = lteExp;
+                        break;
+                    case ExpressionType.NotEqual:
+                        BinaryExpression eqExp = BinaryExpression.Equal(left, right);
+                        el.Expr = eqExp;
+                        break;
+                    case ExpressionType.LessThanOrEqual:
+                        BinaryExpression gtExp = BinaryExpression.GreaterThan(left, right);
+                        el.Expr = gtExp;
+                        break;
+                    case ExpressionType.GreaterThanOrEqual:
+                        BinaryExpression ltExp = BinaryExpression.LessThan(left, right);
+                        el.Expr = ltExp;
+                        break;
+                }
+
+            }
+
+            return rawConstraints;
+        }
+
         public static List<RawConstraint> getLeafNodes(List<RawConstraint> rawConstraints)
         {
             var leafNodes = new List<RawConstraint>();

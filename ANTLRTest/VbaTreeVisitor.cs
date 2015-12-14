@@ -57,7 +57,6 @@ namespace ANTLRTest
             {
                 var child = valueStatement.GetChild(i);
                 var type = child.GetType().ToString();
-                Console.WriteLine(child.GetType());
 
                 if (child.GetText() == " ")
                 {
@@ -77,7 +76,7 @@ namespace ANTLRTest
                     {
                         value = child.GetText();
                     }
-                    Console.WriteLine(child.GetText());
+                    // Console.WriteLine(child.GetText());
                 }
 
             }
@@ -108,18 +107,12 @@ namespace ANTLRTest
                 String parentType = parent.GetType().ToString();
                 if (parentType == "VBGrammarParser+SubStmtContext")
                 {
-                    Console.WriteLine("Sub statement found before any branches, set parent null");
+                    // Console.WriteLine("Sub statement found before any branches, set parent null");
                     RuleContext token = (RuleContext)parent.Payload;
                     ParserRuleContext token1 = (ParserRuleContext)parent.Payload;
                     var test = token1.Start;
                     rc.ParentLineNumber = parent.SourceInterval.a;
                     
-                    //var test = parent.SourceInterval;
-                    //Token firstToken = tokenStream.get(test.a);
-                    //Token firstToken = tokenStream.get(sourceInterval.a);
-                    //int line = firstToken.getLine();
-
-
                     break;
                 }
                 else if (parentType == "VBGrammarParser+BlockIfThenElseContext")
@@ -129,7 +122,7 @@ namespace ANTLRTest
                 }
 
                 parent = parent.Parent;
-                Console.WriteLine("Parent type: " + parentType);
+                // Console.WriteLine("Parent type: " + parentType);
             }
         }
 

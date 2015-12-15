@@ -39,7 +39,12 @@ namespace Z3Solver
                 // Call the solver to produce data for each constraint set in list
                 String equation = c.ToString();
                 Expr testData = parseAll2(equation);
+                if (testData != null)
+                {
+                    Console.WriteLine("The value is: " + testData);
+                }
                 Console.WriteLine(c.ToString());
+                
             }
         }
         
@@ -72,22 +77,19 @@ namespace Z3Solver
                 formula = formula.ToLower();
                 formula = formula.Remove(0, 1);               
                 formula = formula.Remove(formula.Length - 2, 1);
-                Console.WriteLine("equation: " + formula);
                 int formulaLength = formula.Length;
                 int index;
                 String leftEquation;
                 int leftSymbolIndex;
                 String leftValue1;
                 String leftValue2;
-
-
                 String rightEquation;
                 int rightSymbolIndex;
                 String rightValue1;
                 String rightValue2;
                 Expr resultQ;
 
-                Console.WriteLine(formula);
+                Console.WriteLine("formula: " + formula);
 
                 if (formula.Contains(")and("))
                 {
@@ -143,9 +145,9 @@ namespace Z3Solver
                             resultQ = LeAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
-                        else
+                        else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right >");
+                            Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
                             Console.WriteLine("right value1: " + rightValue1);
@@ -154,6 +156,29 @@ namespace Z3Solver
                             resultQ = LeAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
+                        else if(rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = LeAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = LeAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                       
                     }
                     else if (leftEquation.Contains(">="))
                     {
@@ -198,15 +223,37 @@ namespace Z3Solver
                             resultQ = GeAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
-                        else
+                        else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right >");
+                            Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
                             Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
                             Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if(rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = GeAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = GeAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
@@ -254,9 +301,9 @@ namespace Z3Solver
                             resultQ = LtAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
-                        else
+                        else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right >");
+                            Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
                             Console.WriteLine("right value1: " + rightValue1);
@@ -265,8 +312,30 @@ namespace Z3Solver
                             resultQ = LtAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
+                        else if(rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = LtAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = LtAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
                     }
-                    else
+                    else if(leftEquation.Contains(">"))
                     {
                         Console.WriteLine("left symbol: >");
                         leftSymbolIndex = leftEquation.IndexOf(">");
@@ -309,15 +378,192 @@ namespace Z3Solver
                             resultQ = GtAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
-                        else
+                        else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right >");
+                            Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
                             Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
                             Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if(rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = GtAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = GtAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                    }
+                    else if(leftEquation.Contains("!="))
+                    {
+                        Console.WriteLine("left symbol: !=");
+                        leftSymbolIndex = leftEquation.IndexOf("!=");
+                        leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
+                        Console.WriteLine("left value1: " + leftValue1);
+                        leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
+                        Console.WriteLine("left value2: " + leftValue2);
+                        
+                            //Get the values for the right Equation
+                        if (rightEquation.Contains("<="))
+                        {
+                            Console.WriteLine("right symbol: <=");
+                            rightSymbolIndex = rightEquation.IndexOf("<=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeAndLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains(">="))
+                        {
+                            Console.WriteLine("right symbol: >=");
+                            rightSymbolIndex = rightEquation.IndexOf(">=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeAndGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains("<"))
+                        {
+                            Console.WriteLine("right symbol: <");
+                            rightSymbolIndex = rightEquation.IndexOf("<");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains(">"))
+                        {
+                            Console.WriteLine("right symbol: >");
+                            rightSymbolIndex = rightEquation.IndexOf(">");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("left symbol: ==");
+                        leftSymbolIndex = leftEquation.IndexOf("==");
+                        leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
+                        Console.WriteLine("left value1: " + leftValue1);
+                        leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
+                        Console.WriteLine("left value2: " + leftValue2);
+                        
+                            //Get the values for the right Equation
+                        if (rightEquation.Contains("<="))
+                        {
+                            Console.WriteLine("right symbol: <=");
+                            rightSymbolIndex = rightEquation.IndexOf("<=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeAndLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains(">="))
+                        {
+                            Console.WriteLine("right symbol: >=");
+                            rightSymbolIndex = rightEquation.IndexOf(">=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeAndGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains("<"))
+                        {
+                            Console.WriteLine("right symbol: <");
+                            rightSymbolIndex = rightEquation.IndexOf("<");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains(">"))
+                        {
+                            Console.WriteLine("right symbol: >");
+                            rightSymbolIndex = rightEquation.IndexOf(">");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
@@ -377,15 +623,37 @@ namespace Z3Solver
                             resultQ = LeOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
-                        else
+                        else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right >");
+                            Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
                             Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
                             Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if(rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = LeOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = LeOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
@@ -432,15 +700,37 @@ namespace Z3Solver
                             resultQ = GeOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
-                        else
+                        else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right >");
+                            Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
                             Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
                             Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if(rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = GeOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = GeOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
@@ -488,9 +778,9 @@ namespace Z3Solver
                             resultQ = LtOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
-                        else
+                        else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right >");
+                            Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
                             Console.WriteLine("right value1: " + rightValue1);
@@ -499,8 +789,30 @@ namespace Z3Solver
                             resultQ = LtOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
+                        else if(rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = LtOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else 
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = LtOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
                     }
-                    else
+                    else if (leftEquation.Contains(">"))
                     {
                         Console.WriteLine("left symbol: >");
                         leftSymbolIndex = leftEquation.IndexOf(">");
@@ -543,9 +855,9 @@ namespace Z3Solver
                             resultQ = GtOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
-                        else
+                        else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right >");
+                            Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
                             Console.WriteLine("right value1: " + rightValue1);
@@ -554,7 +866,184 @@ namespace Z3Solver
                             resultQ = GtOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
+                        else if(rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = GtOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = GtOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
                     }
+                    else if (leftEquation.Contains("!="))
+                    {
+                        Console.WriteLine("left symbol: !=");
+                        leftSymbolIndex = leftEquation.IndexOf("!=");
+                        leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
+                        Console.WriteLine("left value1: " + leftValue1);
+                        leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
+                        Console.WriteLine("left value2: " + leftValue2);
+
+                        //Get the values for the right Equation
+                        if (rightEquation.Contains("<="))
+                        {
+                            Console.WriteLine("right symbol: <=");
+                            rightSymbolIndex = rightEquation.IndexOf("<=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeOrLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains(">="))
+                        {
+                            Console.WriteLine("right symbol: >=");
+                            rightSymbolIndex = rightEquation.IndexOf(">=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeOrGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains("<"))
+                        {
+                            Console.WriteLine("right symbol: <");
+                            rightSymbolIndex = rightEquation.IndexOf("<");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains(">"))
+                        {
+                            Console.WriteLine("right symbol: >");
+                            rightSymbolIndex = rightEquation.IndexOf(">");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = NeOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("left symbol: ==");
+                        leftSymbolIndex = leftEquation.IndexOf("==");
+                        leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
+                        Console.WriteLine("left value1: " + leftValue1);
+                        leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
+                        Console.WriteLine("left value2: " + leftValue2);
+
+                        //Get the values for the right Equation
+                        if (rightEquation.Contains("<="))
+                        {
+                            Console.WriteLine("right symbol: <=");
+                            rightSymbolIndex = rightEquation.IndexOf("<=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeOrLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains(">="))
+                        {
+                            Console.WriteLine("right symbol: >=");
+                            rightSymbolIndex = rightEquation.IndexOf(">=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeOrGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains("<"))
+                        {
+                            Console.WriteLine("right symbol: <");
+                            rightSymbolIndex = rightEquation.IndexOf("<");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains(">"))
+                        {
+                            Console.WriteLine("right symbol:  >");
+                            rightSymbolIndex = rightEquation.IndexOf(">");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else if (rightEquation.Contains("!="))
+                        {
+                            Console.WriteLine("right symbol: !=");
+                            rightSymbolIndex = rightEquation.IndexOf("!=");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                        else
+                        {
+                            Console.WriteLine("right symbol: ==");
+                            rightSymbolIndex = rightEquation.IndexOf("==");
+                            rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
+                            Console.WriteLine("right value1: " + rightValue1);
+                            rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
+                            Console.WriteLine("right value2: " + rightValue2);
+                            resultQ = EeOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
+                            return resultQ;
+                        }
+                    }
+
                 }
                 return null; 
             }
@@ -672,6 +1161,35 @@ namespace Z3Solver
             }
             return null;
         }
+
+        public static Expr LtAndNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
 
         //-----------GT AND --------------------------------------------------------------------
 
@@ -1127,6 +1645,35 @@ namespace Z3Solver
             return null;
         }
 
+        public static Expr LtOrNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+
         //----------GT OR ---------------------------------------------------------------------
         public static Expr GtOrLe(String left1, int left2, String right1, int right2)
         {
@@ -1465,6 +2012,1092 @@ namespace Z3Solver
             }
             return null;
         }
+
+
+
+
+
+        
+        public static Expr GtAndNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr GtOrNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr LeAndNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr LeOrNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr GeAndNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr GeOrNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr LtAndEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b),ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b),ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr LtOrEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr GtAndEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr GtOrEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr LeAndEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr LeOrEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr GeAndEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr GeOrEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+
+        //-----------Ne And-------------------------------------------------------------
+        public static Expr NeAndLe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))),ctx.MkLe((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeAndGe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeAndLt(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeAndGt(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeAndNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeAndEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        //-----------Ne Or-------------------------------------------------------------
+        public static Expr NeOrLe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeOrGe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeOrLt(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeOrGt(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeOrNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr NeOrEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b))), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+
+        //-----------Ee And-------------------------------------------------------------
+
+        public static Expr EeAndLe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeAndGe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeAndLt(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeAndGt(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeAndNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeAndEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkEq((ArithExpr)a, (ArithExpr)b))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkEq((ArithExpr)a, (ArithExpr)b)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+
+
+
+        //-----------Ee Or-------------------------------------------------------------
+
+        public static Expr EeOrLe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeOrGe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeOrLt(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeOrGt(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d)));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeOrNe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+        public static Expr EeOrEe(String left1, int left2, String right1, int right2)
+        {
+            using (Context ctx = new Context())
+            {
+                Expr a = ctx.MkConst(left1, ctx.MkIntSort());
+                Expr b = ctx.MkNumeral(left2, ctx.MkIntSort());
+                Expr c = ctx.MkConst(right1, ctx.MkIntSort());
+                Expr d = ctx.MkNumeral(right2, ctx.MkIntSort());
+
+                Solver s = ctx.MkSolver();
+                s.Assert(ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
+                s.Check();
+
+                BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
+                Model model = Check(ctx, testing, Status.SATISFIABLE);
+                Console.WriteLine("testing: " + model);
+
+                Expr result2;
+                Model m2 = s.Model;
+                foreach (FuncDecl d2 in m2.Decls)
+                {
+                    result2 = m2.ConstInterp(d2);
+                    return result2;
+                }
+            }
+            return null;
+        }
+
+
+
+
+
+
 
     }
 

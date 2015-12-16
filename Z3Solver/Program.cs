@@ -93,88 +93,88 @@ namespace Z3Solver
 
                 if (formula.Contains(")and("))
                 {
-                    Console.WriteLine("And Equation");
+                    //Console.WriteLine("And Equation");
                     //Get the values of the left equation  
                     index = formula.IndexOf(")and(");
                     leftEquation = formula.Substring(0, index + 1);
-                    Console.WriteLine("left equation: " + leftEquation);
+                    //Console.WriteLine("left equation: " + leftEquation);
                     //Get the value of the right equation
                     rightEquation = formula.Substring(index + 4, formulaLength - (index + 4));
-                    Console.WriteLine("right equation: " + rightEquation);
+                    //Console.WriteLine("right equation: " + rightEquation);
                     //Check the sign of the left equation
                     if (leftEquation.Contains("<="))
                     {
-                        Console.WriteLine("left symbol: <=");
+                      //  //Console.WriteLine("left symbol: <=");
                         leftSymbolIndex = leftEquation.IndexOf("<=");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                           // //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                           // //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                           // //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeAndLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            ////Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            ////Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            ////Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeAndGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            ////Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            ////Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            ////Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            ////Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            ////Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            ////Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            ////Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            ////Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            ////Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            ////Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            ////Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            ////Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
@@ -182,77 +182,77 @@ namespace Z3Solver
                     }
                     else if (leftEquation.Contains(">="))
                     {
-                        Console.WriteLine("left symbol: >=");
+                        //Console.WriteLine("left symbol: >=");
                         leftSymbolIndex = leftEquation.IndexOf(">=");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeAndLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeAndGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
@@ -260,231 +260,231 @@ namespace Z3Solver
                     else if (leftEquation.Contains("<"))
                     {
                         //Get the values for the left Equation. 
-                        Console.WriteLine("left symbol: <");
+                        //Console.WriteLine("left symbol: <");
                         leftSymbolIndex = leftEquation.IndexOf("<");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 1, leftEquation.Length - leftSymbolIndex - 2);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtAndLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ; 
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtAndGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex -2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
                     else if(leftEquation.Contains(">"))
                     {
-                        Console.WriteLine("left symbol: >");
+                        //Console.WriteLine("left symbol: >");
                         leftSymbolIndex = leftEquation.IndexOf(">");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 1, leftEquation.Length - leftSymbolIndex - 2);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtAndLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtAndGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
                     else if(leftEquation.Contains("!="))
                     {
-                        Console.WriteLine("left symbol: !=");
+                        //Console.WriteLine("left symbol: !=");
                         leftSymbolIndex = leftEquation.IndexOf("!=");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
                         
                             //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeAndLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeAndGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
@@ -495,74 +495,74 @@ namespace Z3Solver
                         Console.WriteLine("left symbol: ==");
                         leftSymbolIndex = leftEquation.IndexOf("==");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
                         
                             //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeAndLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeAndGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeAndLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeAndGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeAndNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeAndEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
@@ -571,165 +571,165 @@ namespace Z3Solver
                 //fix here and below
                 if (formula.Contains(")or("))
                 {
-                    Console.WriteLine("OR Equation");
+                    //Console.WriteLine("OR Equation");
                     //Get the values of the left equation  
                     index = formula.IndexOf(")or(");
                     leftEquation = formula.Substring(0, index + 1);
-                    Console.WriteLine("left equation: " + leftEquation);
+                    //Console.WriteLine("left equation: " + leftEquation);
                     //Get the value of the right equation
                     rightEquation = formula.Substring(index + 3, formulaLength - (index + 3));
-                    Console.WriteLine("right equation: " + rightEquation);
+                    //Console.WriteLine("right equation: " + rightEquation);
                     //Check the sign of the left equation
                     if (leftEquation.Contains("<="))
                     {
-                        Console.WriteLine("left symbol: <=");
+                        //Console.WriteLine("left symbol: <=");
                         leftSymbolIndex = leftEquation.IndexOf("<=");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeOrLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeOrGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LeOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
                     else if (leftEquation.Contains(">="))
                     {
-                        Console.WriteLine("left symbol: >=");
+                        //Console.WriteLine("left symbol: >=");
                         leftSymbolIndex = leftEquation.IndexOf(">=");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeOrLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeOrGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GeOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
@@ -737,308 +737,308 @@ namespace Z3Solver
                     else if (leftEquation.Contains("<"))
                     {
                         //Get the values for the left Equation. 
-                        Console.WriteLine("left symbol: <");
+                        //Console.WriteLine("left symbol: <");
                         leftSymbolIndex = leftEquation.IndexOf("<");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 1, leftEquation.Length - leftSymbolIndex - 2);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtOrLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtOrGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else 
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = LtOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
                     else if (leftEquation.Contains(">"))
                     {
-                        Console.WriteLine("left symbol: >");
+                       // Console.WriteLine("left symbol: >");
                         leftSymbolIndex = leftEquation.IndexOf(">");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 1, leftEquation.Length - leftSymbolIndex - 2);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtOrLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtOrGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if(rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = GtOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
                     else if (leftEquation.Contains("!="))
                     {
-                        Console.WriteLine("left symbol: !=");
+                       // Console.WriteLine("left symbol: !=");
                         leftSymbolIndex = leftEquation.IndexOf("!=");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeOrLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeOrGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol: >");
+                            //Console.WriteLine("right symbol: >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = NeOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                     }
                     else
                     {
-                        Console.WriteLine("left symbol: ==");
+                        //Console.WriteLine("left symbol: ==");
                         leftSymbolIndex = leftEquation.IndexOf("==");
                         leftValue1 = leftEquation.Substring(1, leftSymbolIndex - 1);
-                        Console.WriteLine("left value1: " + leftValue1);
+                        //Console.WriteLine("left value1: " + leftValue1);
                         leftValue2 = leftEquation.Substring(leftSymbolIndex + 2, leftEquation.Length - leftSymbolIndex - 3);
-                        Console.WriteLine("left value2: " + leftValue2);
+                        //Console.WriteLine("left value2: " + leftValue2);
 
                         //Get the values for the right Equation
                         if (rightEquation.Contains("<="))
                         {
-                            Console.WriteLine("right symbol: <=");
+                            //Console.WriteLine("right symbol: <=");
                             rightSymbolIndex = rightEquation.IndexOf("<=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeOrLe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">="))
                         {
-                            Console.WriteLine("right symbol: >=");
+                            //Console.WriteLine("right symbol: >=");
                             rightSymbolIndex = rightEquation.IndexOf(">=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeOrGe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("<"))
                         {
-                            Console.WriteLine("right symbol: <");
+                            //Console.WriteLine("right symbol: <");
                             rightSymbolIndex = rightEquation.IndexOf("<");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeOrLt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains(">"))
                         {
-                            Console.WriteLine("right symbol:  >");
+                           // Console.WriteLine("right symbol:  >");
                             rightSymbolIndex = rightEquation.IndexOf(">");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 1, rightEquation.Length - rightSymbolIndex - 2);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeOrGt(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else if (rightEquation.Contains("!="))
                         {
-                            Console.WriteLine("right symbol: !=");
+                            //Console.WriteLine("right symbol: !=");
                             rightSymbolIndex = rightEquation.IndexOf("!=");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeOrNe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }
                         else
                         {
-                            Console.WriteLine("right symbol: ==");
+                            //Console.WriteLine("right symbol: ==");
                             rightSymbolIndex = rightEquation.IndexOf("==");
                             rightValue1 = rightEquation.Substring(1, rightSymbolIndex - 1);
-                            Console.WriteLine("right value1: " + rightValue1);
+                            //Console.WriteLine("right value1: " + rightValue1);
                             rightValue2 = rightEquation.Substring(rightSymbolIndex + 2, rightEquation.Length - rightSymbolIndex - 3);
-                            Console.WriteLine("right value2: " + rightValue2);
+                            //Console.WriteLine("right value2: " + rightValue2);
                             resultQ = EeOrEe(leftValue1, Int32.Parse(leftValue2), rightValue1, Int32.Parse(rightValue2));
                             return resultQ;
                         }

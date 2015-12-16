@@ -13,25 +13,6 @@ namespace Z3Solver
     {
         static void Main(string[] args)
         {
-            using (Context ctx = new Context())
-            {
-                // Simplified case: (p1 < 3) or (p2 > 3)
-            /*    ParameterExpression p1 = Expression.Parameter(typeof(int), "p1");
-                ParameterExpression p2 = Expression.Parameter(typeof(int), "p2");
-                ConstantExpression three = Expression.Constant(3);
-                BinaryExpression b1 = Expression.LessThan(p1, three);
-                BinaryExpression b2 = Expression.GreaterThan(p2, three);
-                BinaryExpression final = Expression.Or(b1, b2);
-
-                Z3Solver solver = new Z3Solver();
-                var result = solver.calculateTestData(final);*/
-
-                //IntExpr x = ctx.MkIntConst("a");
-                //IntExpr one = ctx.MkInt(3);
-                //BoolExpr test = ctx.MkLt(x, one); // x< 3
-                //Model model = Check(ctx, test, Status.SATISFIABLE);
-            }
-
             // Generate Parse Tree from file
             var constraints = ConstraintExtractor.getConstraints();
             foreach (Expression c in constraints)
@@ -39,10 +20,6 @@ namespace Z3Solver
                 // Call the solver to produce data for each constraint set in list
                 String equation = c.ToString();
                 Expr testData = parseAll2(equation);
-                if (testData != null)
-                {
-                    Console.WriteLine("The value is: " + testData);
-                }
                 Console.WriteLine(c.ToString());
                 
             }
@@ -1064,8 +1041,7 @@ namespace Z3Solver
                 s.Check();
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));      
-                Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                Model model = Check(ctx, testing, Status.SATISFIABLE);             
 
                 Expr result2;
                 Model m2 = s.Model; 
@@ -1093,7 +1069,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1121,7 +1097,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1149,7 +1125,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1177,7 +1153,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1208,7 +1184,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1236,7 +1212,6 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1264,7 +1239,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1292,7 +1267,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1322,7 +1297,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1350,7 +1325,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1378,7 +1353,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1406,7 +1381,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1435,7 +1410,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1463,7 +1438,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1491,7 +1466,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1519,7 +1494,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1548,7 +1523,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1576,7 +1551,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1604,7 +1579,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1632,7 +1607,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1660,7 +1635,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1690,7 +1665,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1718,7 +1693,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1746,7 +1721,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1774,7 +1749,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1803,7 +1778,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1831,7 +1806,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1859,7 +1834,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1887,7 +1862,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1916,7 +1891,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1944,7 +1919,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -1972,7 +1947,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2000,7 +1975,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2033,7 +2008,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2061,7 +2036,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2089,7 +2064,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2117,7 +2092,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2145,7 +2120,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2173,7 +2148,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2201,7 +2176,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLt((ArithExpr)a, (ArithExpr)b),ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2229,7 +2204,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLt((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2257,7 +2232,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2285,7 +2260,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGt((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2313,7 +2288,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2341,7 +2316,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkLe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2369,7 +2344,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2397,7 +2372,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkGe((ArithExpr)a, (ArithExpr)b), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2427,7 +2402,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2455,7 +2430,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2483,7 +2458,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2511,7 +2486,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2539,7 +2514,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2567,7 +2542,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2596,7 +2571,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2624,7 +2599,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2652,7 +2627,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2680,7 +2655,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2708,7 +2683,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2736,7 +2711,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkNot(ctx.MkEq((ArithExpr)a, (ArithExpr)b)), ctx.MkEq((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2767,7 +2742,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2795,7 +2770,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2823,7 +2798,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2851,7 +2826,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2879,7 +2854,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2907,7 +2882,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkAnd(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkEq((ArithExpr)a, (ArithExpr)b)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2940,7 +2915,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2968,7 +2943,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGe((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -2996,7 +2971,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkLt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -3024,7 +2999,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), ctx.MkGt((ArithExpr)c, (ArithExpr)d));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -3052,7 +3027,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkNot(ctx.MkEq((ArithExpr)c, (ArithExpr)d))));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;
@@ -3080,7 +3055,7 @@ namespace Z3Solver
 
                 BoolExpr testing = ctx.MkOr(ctx.MkEq((ArithExpr)a, (ArithExpr)b), (ctx.MkEq((ArithExpr)c, (ArithExpr)d)));
                 Model model = Check(ctx, testing, Status.SATISFIABLE);
-                Console.WriteLine("testing: " + model);
+                
 
                 Expr result2;
                 Model m2 = s.Model;

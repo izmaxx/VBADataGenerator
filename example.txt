@@ -1,0 +1,14 @@
+Sub Main()
+
+If age = 15 Then
+    Range("A1").Interior.ColorIndex = 1
+    If Size > 2 Then
+        Range("A2").Interior.ColorIndex = 2
+    Else
+        Range("A2").Interior.ColorIndex = 3
+    End If
+Else
+    Range("A2").Interior.ColorIndex = 4
+End If
+
+End Sub
